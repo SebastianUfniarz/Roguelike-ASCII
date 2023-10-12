@@ -6,14 +6,11 @@
 Gra jest typowym roguelike'em z kilkoma nowymi elementami, które zazwyczaj nie występują, aby lekko urozmaicić rozgrywkę, ale nie chcę tutaj wchodzić w szczegóły. Znajdują się one poniżej.
 
 
-#### Legenda
+## Legenda
 1. Postacie
 1. Historia
-1. Motyw
-1. Rozwój fabuły
 1. Rozgrywka
 1. Cel
-1. Umiejętności gracza
 1. Mechanika gry
 1. Przedmioty i wzmocnienia
 1. Postęp i Wyzwania
@@ -23,52 +20,39 @@ Gra jest typowym roguelike'em z kilkoma nowymi elementami, które zazwyczaj nie 
 1. Lokalizacje
 1. Inne pomysły
 
-```
-cd existing_repo
-git remote add origin https://umcs.schneiderp.ovh/sebastian.ufniarz/gra-rougelike-sebastian-ufniarz.git
-git branch -M main
-git push -uf origin main
-```
 
-## Integrate with your tools
 
-- [ ] [Set up project integrations](https://umcs.schneiderp.ovh/sebastian.ufniarz/gra-rougelike-sebastian-ufniarz/-/settings/integrations)
+## 1. Postacie
 
-## Collaborate with your team
+Jeżeli chodzi o postacie to będzie jedna główna tylko będzie ona miała różne klasy obstawiam tak z 6 głównych z potencjalnym póżniej dodaniem następnych w postaci podklas. Oczywiście będa również różnego rodzaju potwory główną tematyką będzie spaczenie niebios czyli jakieś spaczone anioły itd. 
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+## 2. Historia
 
-## Test and Deploy
+Historia będzie przedstawiana w postaci notatek ktore będą leżeć w losowych pokojach. Jeżeli o główny zarys to będzie wyglądać on tak:
+Jest bóg który został spaczony przez jakas mroczna moc i zamiast pozwalac duszom spokojnie trafic do nieba lub piekła zaczyną te dusze niszczyć (jak do tego doszło postram się umieścić). No i teraz będą różne etapy tego spaczenia największe na poziomie z bogiem im niżej tym mniejsze spaczenie. Oczywiście zwykły świat ludzi, elfów , orków krasnoludów na to zaareagował, mianowicie wysłali oni swoich najsilniejszych wojowników do nieba za pomoca artefaktów które zbudowali wsyszcy razem. Niestety przeżył tylko jeden i tu pojawia sie wybór postaci i klasy.
 
-Use the built-in continuous integration in GitLab.
+## 3. Rozgrywka
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+Rozgrywka będzie typowa dla gier typu Rougelike czyli turowość, różne klasy, ekwipunek (dla różnych ras i klas niektóre bronie będą zablokowoane np. nie wyobrażam sobie elfa który biega z dwu ręczym toporem w sam środek walki).
 
-***
+## 4. Cel
 
-# Editing this README
+Celem głównym jest zabicie spaczonego wroga i znaleźenie artefaktu który pozwoli go odrodzić aby niebo znów zaczeło działać tak jak wcześniej. 
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+## 5. Mechanika gry
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
 
-## Name
-Choose a self-explaining name for your project.
+## 6. Przedmioty i wzmocnienia
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+Przemioty będą dostosowane do klas i ras czyli elf będzie się mógł posługiwać mieczami, łukami itd. ale nie będzie mógł używać dwu ręczengo topra. Ork nie będzie mógł miec różdżki i rzucać czarów ale za to może będzie miał jakieś specjalne wzmocnienia typu okrzyki albo w potaci umiejętości pasywnych. Na ten moment nie przewiduje zbroi czyli hełmów, rekawic itd. ale może to zmienie jak będzie to proste do zrobienia. Podsumowując będzie spora ilość broni tak aby każda klasa jak i rasa miały jakieś specjalne bronie tylko i wyłącznie dla własnego użytku (możliwe że do zmiany jak będie za dużo roboty z tym). 
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+## 7. Postęp i Wyzwania
+
+Rozwijanie postaci będzie klasyczne czyli zdobywanie doświadczania za każdego pokonanego przeciwnika aby otrzymać poziom za którym dostaje się statystyki. Chciałbym również dodać coś takiego że co 5 poziomów będzie do wybrania wzmocnienie taka umiejętność pasywna (bądź aktywna jezeli jest to w miarę proste) np. za każdego zabitego przeciwnika będzie przywracana jakaś część zdrowia albo wzmocnienie zdobywania statystyk do życia, siły itd. Wyzwaniem będzie oczywiście zarządzanie swoimi zasobami życia głównie gdyż raczej będzie mało sklepików w których będzie można je zakupić bądź znaleźć przy przeciwnikach.
+
+## 8. Przegrywanie
+
+Przegywa się w momenicie w którym życie spadnie do 0 i zaczyna się grę od samego początku nie będzie raczej jakiś drugich szans chyba że jako wzmocnienie z jakimś 5% szans
 
 ## Visuals
 Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
