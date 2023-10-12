@@ -40,6 +40,7 @@ Celem głównym jest zabicie spaczonego wroga i znaleźenie artefaktu który poz
 
 ## 5. Mechanika gry
 
+Typowa walka turowa, każda broń zadaje konkretne obrażenie z jakiegoś przedziału. Magia ignoruje pancerz przeciwnika. Każdy atak ma szanse na nie trafienie im większe szczęście tym łatwiej trafić, szczęscie będzie również wpływać na szanse na trafienie krytyczne (może nawet na bardzo krytyczne). Jest oczywiście życie postaci, siła będzie wpływać na moc ataku postaci dla broni białych itd. dla magów będzie bezużyteczna, zręczność dla łotrzyków z łukami szytyletami. 
 
 ## 6. Przedmioty i wzmocnienia
 
@@ -55,7 +56,7 @@ Przegywa się w momencie w którym życie spadnie do 0 i zaczyna się grę od sa
 
 ## 9. Styl artystyczny
 
-Jeżeli chodzi o styl to myślę ze będzie to spaczenie (czerwone) na różnych potworach ścianach itd. w senise im wyższe piętro tym bardziej widoczne.
+Jeżeli chodzi o styl to myślę ze będzie to spaczenie (czerwone) na różnych potworach ścianach itd. w sensie im wyższe piętro tym bardziej widoczne.
 
 ## 10. Opis techniczny
 
