@@ -18,13 +18,12 @@ Gra jest typowym roguelike'em z kilkoma nowymi elementami, które zazwyczaj nie 
 1. Styl artystyczny
 1. Opis techniczny
 1. Lokalizacje
-1. Inne pomysły
 
 
 
 ## 1. Postacie
 
-Jeżeli chodzi o postacie to będzie jedna główna tylko będzie ona miała różne klasy obstawiam tak z 6 głównych z potencjalnym póżniej dodaniem następnych w postaci podklas. Oczywiście będa również różnego rodzaju potwory główną tematyką będzie spaczenie niebios czyli jakieś spaczone anioły itd. 
+Jeżeli chodzi o postacie to będzie jedna główna tylko będzie ona miała różne klasy obstawiam tak z 6 głównych z potencjalnym póżniej dodaniem następnych w postaci podklas. Oczywiście będa również różnego rodzaju potwory główną tematyką będzie spaczenie niebios czyli jakieś spaczone anioły itd. Na tych pierwszych piętrach jeszcze będa jakieś gobliny itd. 
 
 ## 2. Historia
 
@@ -52,35 +51,20 @@ Rozwijanie postaci będzie klasyczne czyli zdobywanie doświadczania za każdego
 
 ## 8. Przegrywanie
 
-Przegywa się w momenicie w którym życie spadnie do 0 i zaczyna się grę od samego początku nie będzie raczej jakiś drugich szans chyba że jako wzmocnienie z jakimś 5% szans
+Przegywa się w momencie w którym życie spadnie do 0 i zaczyna się grę od samego początku nie będzie raczej jakiś drugich szans chyba że jako wzmocnienie z jakimś 5% szans że przywróci postać do życia z np. 50 życia.
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+## 9. Styl artystyczny
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+Jeżeli chodzi o styl to myślę ze będzie to spaczenie (czerwone) na różnych potworach ścianach itd. w senise im wyższe piętro tym bardziej widoczne.
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+## 10. Opis techniczny
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+Na razie brak.
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+## 11. Lokalizacje
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+Lokalizacja będzie w sumie jedna tylko będą się zmieniać piętra no i oczywiście na tych piętrach jakby ściany potowry itd. będą wyglądać inaczej 
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+## Krótki komentarz
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+Chciałbym dodać również jakieś unikalne mechaniki do tej gry inspirowane innymi grami ale nie wiem czy to nie będzie nie dość że za trudne to za dużo czasu zajmie.
