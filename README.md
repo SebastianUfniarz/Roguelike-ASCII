@@ -8,20 +8,20 @@ Gra jest typowym roguelike'em z kilkoma nowymi elementami, które zazwyczaj nie 
 
 #### Legenda
 1. Postacie
-2. Historia
-3. Motyw
-4. Rozwój fabuły
-5. Rozgrywka
-6. Cel
-7. Umiejętności gracza
-8. Mechanika gry
-9. Przedmioty i wzmocnienia
-10. Postęp i Wyzwania
-11. Przegrywanie
-12. Styl artystyczny
-13. Opis techniczny
-14. Lokalizacje
-15. Inne pomysły
+1. Historia
+1. Motyw
+1. Rozwój fabuły
+1. Rozgrywka
+1. Cel
+1. Umiejętności gracza
+1. Mechanika gry
+1. Przedmioty i wzmocnienia
+1. Postęp i Wyzwania
+1. Przegrywanie
+1. Styl artystyczny
+1. Opis techniczny
+1. Lokalizacje
+1. Inne pomysły
 
 ```
 cd existing_repo
