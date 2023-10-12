@@ -21,26 +21,54 @@ Gra jest typowym roguelike'em z kilkoma nowymi elementami, które zazwyczaj nie 
 
 
 
-## 1. Postacie
+## 1. Postacie i potwory 
 
-Jeżeli chodzi o postacie to będzie jedna główna tylko będzie ona miała różne klasy obstawiam tak z 6 głównych z potencjalnym póżniej dodaniem następnych w postaci podklas. Oczywiście będa również różnego rodzaju potwory główną tematyką będzie spaczenie niebios czyli jakieś spaczone anioły itd. Na tych pierwszych piętrach jeszcze będa jakieś gobliny itd. 
+Jeśli chodzi o postacie, będzie istnieć tylko jedna główna, ale będzie ona miała 3 główne klasy, takie jak wojownik, mag i łotrzyk. Oczywiście, będą również różnego rodzaju potwory. Główną tematyką będzie spaczenie niebios, czyli istoty, takie jak spaczone anioły, będą odgrywały znaczącą rolę. Na pierwszych piętrach gry pojawią się również takie klasyczne potwory jak gobliny, wilkołaki, zombie, wampiry, demony, upiory, duchy, ogry, minotaurzy itp.
+
+Jeśli chodzi o dostępne rasy, w grze będą dostępne następujące:
+
+- Ludzie
+- Elfy
+- Krasnoludy
+- Orkowie
+- Gobliny
+
+Należy zaznaczyć, że w miarę rozwoju gry, mogą pojawić się dodatkowe główne klasy i ewentualnie podklasy, które urozmaicą rozgrywkę.
 
 ## 2. Historia
 
-Historia będzie przedstawiana w postaci notatek ktore będą leżeć w losowych pokojach. Jeżeli o główny zarys to będzie wyglądać on tak:
-Jest bóg który został spaczony przez jakas mroczna moc i zamiast pozwalac duszom spokojnie trafic do nieba lub piekła zaczyną te dusze niszczyć (jak do tego doszło postram się umieścić). No i teraz będą różne etapy tego spaczenia największe na poziomie z bogiem im niżej tym mniejsze spaczenie. Oczywiście zwykły świat ludzi, elfów , orków krasnoludów na to zaareagował, mianowicie wysłali oni swoich najsilniejszych wojowników do nieba za pomoca artefaktów które zbudowali wsyszcy razem. Niestety przeżył tylko jeden i tu pojawia sie wybór postaci i klasy.
+Historia będzie przedstawiana w postaci notatek, które będą leżeć w losowych pokojach. Jeśli chodzi o główny zarys, wygląda on tak: Istnieje bóg, który został spaczony przez jakąś mroczną moc. Zamiast pozwalać duszom spokojnie trafić do nieba lub piekła, zaczął je niszczyć, co wywołało ogromny chaos wśród wszystkich ludów (jak doszło do tego, postaram się umieścić w grze). Teraz będziemy świadkami różnych etapów tego spaczenia, gdzie największe zmiany zachodzą na poziomie samego boga, a im niżej, tym mniejsze są skutki spaczania.
+
+Oczywiście, w zwykłym świecie, zamieszkałym przez ludzi, elfów, orków, krasnoludów i goblinów, zareagowano na te wydarzenia. Przestali oni toczyć ze sobą wojny, aby móc się skupić na większym zagrożeniu, a więc wysłali swoich najsilniejszych wojowników do nieba, korzystając z potężnych artefaktów, które wspólnie stworzyli. Niestety, tylko jeden wojownik przeżył tę ekspedycję, co prowadzi nas do wyboru postaci i klasy, w jaką się wcielimy.
 
 ## 3. Rozgrywka
 
-Rozgrywka będzie typowa dla gier typu Rougelike czyli turowość, różne klasy, ekwipunek (dla różnych ras i klas niektóre bronie będą zablokowoane np. nie wyobrażam sobie elfa który biega z dwu ręczym toporem w sam środek walki).
+Rozgrywka w tej grze będzie typowa dla gier typu Roguelike, co oznacza, że będzie oparta na turowości, różnych klasach postaci oraz zróżnicowanym ekwipunku. Wartościowy ekwipunek jest kluczowy dla sukcesu w przetrwaniu i pokonaniu zagrożeń, które czyhają na bohatera. Gracz będzie się poruszać po losowo wygenerowanych poziomach.
+
+Klasy postaci odgrywają istotną rolę w kształtowaniu strategii i stylu gry. Każda klasa będzie posiadać zwiększone statystyki charakterystyczne dla danej rasy i klasy, co pozwoli na różne podejścia do walki. Niektóre bronie lub rodzaje ekwipunku mogą być zablokowane bądź średnio użyteczne dla określonych ras i klas, aby odzwierciedlić charakterystykę danej postaci. Na przykład, nie wyobrażamy sobie elfa, który biega z dwuręcznym toporem w sam środek walki, więc tego typu bronie będą niedostępne dla tej rasy lub nie będą efektywne, uwzględniając statystyki i umiejętności danej klasy i rasy, co sprawi, że walka taką bronią będzie utrudniona.
+
+Ta kompleksowa mechanika gry zachęci graczy do eksperymentowania z różnymi kombinacjami ras, klas i ekwipunku, aby znaleźć optymalny sposób na przetrwanie w nieustannie zmieniającym się i niebezpiecznym świecie gry.
 
 ## 4. Cel
 
-Celem głównym jest zabicie spaczonego wroga i znaleźenie artefaktu który pozwoli go odrodzić aby niebo znów zaczeło działać tak jak wcześniej. 
+Celem głównym gry jest pokonanie spaczonego Boga i odnalezienie artefaktu, który umożliwi jego odrodzenie. Ten artefakt jest kluczowy do przywrócenia równowagi w niebie i przywrócenia normalności w świecie gry. Kiedy gracze odnajdą artefakt, będą musieli wrócić z nim do Boga, pokonująć dodatkowych przeciwników.
+
 
 ## 5. Mechanika gry
 
-Typowa walka turowa, każda broń zadaje konkretne obrażenie z jakiegoś przedziału. Magia ignoruje pancerz przeciwnika. Każdy atak ma szanse na nie trafienie im większe szczęście tym łatwiej trafić, szczęscie będzie również wpływać na szanse na trafienie krytyczne (może nawet na bardzo krytyczne). Jest oczywiście życie postaci, siła będzie wpływać na moc ataku postaci dla broni białych itd. dla magów będzie bezużyteczna, zręczność dla łotrzyków z łukami szytyletami. 
+W grze będzie istnieć kilka kluczowych aspektów mechaniki:
+
+Obrażenia i broń: Każda broń będzie miała swój przedział obrażeń, a rodzaj broni będzie wpływał na umiejętności postaci. Na przykład, broń biała może być zależna od siły, podczas gdy magia będzie umożliwiała uniknięcie pancerza przeciwnika, a zręczność wpływać na moc łuków, sztyletów, mieczy i szanse na uniknięcie tarfienia.
+
+Szansa trafienia: Każdy atak będzie miał określoną szansę na trafienie, zależną od statystyki szczęścia postaci. Im większa ta statystyka, tym łatwiej będzie trafić. Wyższe szczęście może także wpływać na szanse na trafienie krytyczne, które zadadzą znacznie większe obrażenia.
+
+Pancerz: Przeciwnicy mogą posiadać pancerz, który osłabia obrażenia od ataków. Jednak magia będzie miała zdolność do ignorowania pancerza przeciwnika, co stanowi dodatkową strategię w walce.
+
+Statystyki postaci: Statystyki postaci, takie jak siła, zręczność i inteligencja, będą miały wpływ na umiejętności i obrażenia postaci. Siła wpłynie na moc ataku postaci dla broni białych, zręczność będzie istotna dla łotrzyków korzystających z łuków i szytyletów, a inteligencja będzie kluczowym czynnikiem dla magów.
+
+Życie postaci: Każda postać będzie posiadała ograniczoną ilość punktów życia, co oznacza, że gracze będą musieli dbać o swoje zdrowie podczas walki. Może to wymagać korzystania z mikstur, umiejętności leczniczych lub unikania potężnych ataków.
+
+Statystyki jak i inne rzeczy z tym związane będą w przyszłości dalej rozwijane aby gracz miał więcej możliwości wyboru.
 
 ## 6. Przedmioty i wzmocnienia
 
@@ -66,6 +94,4 @@ Na razie brak.
 
 Lokalizacja będzie w sumie jedna tylko będą się zmieniać piętra no i oczywiście na tych piętrach jakby ściany potowry itd. będą wyglądać inaczej 
 
-## Krótki komentarz
 
-Chciałbym dodać również jakieś unikalne mechaniki do tej gry inspirowane innymi grami ale nie wiem czy to nie będzie nie dość że za trudne to za dużo czasu zajmie.
