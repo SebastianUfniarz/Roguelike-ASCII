@@ -6,7 +6,7 @@
 Gra jest typowym roguelike'em z kilkoma nowymi elementami, które zazwyczaj nie występują, aby lekko urozmaicić rozgrywkę, ale nie chcę tutaj wchodzić w szczegóły. Znajdują się one poniżej.
 
 
-#### Add your files
+#### Legenda
 1. Postacie
 2. Historia
 3. Motyw
