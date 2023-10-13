@@ -72,19 +72,39 @@ Statystyki jak i inne rzeczy z tym związane będą w przyszłości dalej rozwij
 
 ## 6. Przedmioty i wzmocnienia
 
-Przemioty będą dostosowane do klas i ras czyli elf będzie się mógł posługiwać mieczami, łukami itd. ale nie będzie mógł używać dwu ręczengo topra. Ork nie będzie mógł miec różdżki i rzucać czarów ale za to może będzie miał jakieś specjalne wzmocnienia typu okrzyki albo w potaci umiejętości pasywnych. Na ten moment nie przewiduje zbroi czyli hełmów, rekawic itd. ale może to zmienie jak będzie to proste do zrobienia. Podsumowując będzie spora ilość broni tak aby każda klasa jak i rasa miały jakieś specjalne bronie tylko i wyłącznie dla własnego użytku (możliwe że do zmiany jak będie za dużo roboty z tym). 
+Dostosowane bronie: Każda klasa i rasa będzie miała dostęp do różnych broni, co pozwoli na unikatowe style walki. Na przykład, elfy mogą korzystać z łuków i mieczy, podczas gdy orkowie będą specjalizować się w broniach białych i możliwe że będą posiadać  specjalne umiejętności wzmocnienia bądź dodatkowe umiejętności pasywne.
+
+Unikalne umiejętności i wzmocnienia: Rasy i klasy będą posiadać unikalne umiejętności pasywne(na razie chciałbym się skupić na pasywnych) lub aktywne, które wpłyną na ich zdolności w walce i poza nią. To dodatkowo urozmaici strategię i styl rozgrywki dla różnych postaci.
+
+Brak zbroi i akcesoriów. (na ten moment, pewnie zostaną dodane później)
+
+Różnorodność broni: Spora ilość broni dostosowanych do klas i ras, aby zapewnić graczom szeroki wybór. Każda klasa i rasa będzie miała dostęp do specjalnych broni, co pozwoli na eksperymentowanie z różnymi zestawami i stylami walki.
+
+Wszystkie te elementy dostosowane do klas i ras wprowadzą unikalne aspekty rozgrywki, zachęcając graczy do eksperymentowania z różnymi postaciami i strategiami w walce z przeciwnikami oraz eksploracji świata gry.
 
 ## 7. Postęp i Wyzwania
 
-Rozwijanie postaci będzie klasyczne czyli zdobywanie doświadczania za każdego pokonanego przeciwnika aby otrzymać poziom za którym dostaje się statystyki. Chciałbym również dodać coś takiego że co 5 poziomów będzie do wybrania wzmocnienie taka umiejętność pasywna (bądź aktywna jezeli jest to w miarę proste) np. za każdego zabitego przeciwnika będzie przywracana jakaś część zdrowia albo wzmocnienie zdobywania statystyk do życia, siły itd. Wyzwaniem będzie oczywiście zarządzanie swoimi zasobami życia głównie gdyż raczej będzie mało sklepików w których będzie można je zakupić bądź znaleźć przy przeciwnikach.
+Rozwijanie postaci będzie klasyczne, polegające na zdobywaniu doświadczenia za każdego pokonanego przeciwnika, co umożliwi zdobywanie poziomów postaci oraz związanych z nimi statystyk.
+
+Co piąty (możliwe że będzie inny) poziom będzie nagradzany wyborem wzmocnienia, takiej umiejętności pasywnej, co pozwoli na dostosowanie postaci do własnych preferencji. Na przykład, po osiągnięciu piątego poziomu gracz może wybrać umiejętność pasywną, która przywraca część zdrowia za każdego zabitego przeciwnika lub zwiększa zdobywanie statystyk życia, siły itd.
+
+Jednym z kluczowych wyzwań będzie zarządzanie zasobami, zwłaszcza punktami życia, ponieważ dostęp do sklepików będzie ograniczony, a mikstury życia nie będą łatwo dostępne. Gracze będą musieli podejmować strategiczne decyzje dotyczące walki i eksploracji, aby przetrwać w niebezpiecznym świecie gry.
+
+Każde piętro będzie stanowiło coraz większe wyzwanie, z przeciwnikami posiadającymi większą ilość zdrowia, wyższą siłę ataku i ewentualnie specjalne umiejętności (to raczej zostanie dodane później), takie jak trucizna, podpalenie i inne.
+
+Takie skalowanie trudności pomoże utrzymać poziom wyzwań i ekscytacji podczas eksploracji gry, a także sprawi, że osiągnięcie coraz wyższych poziomów stanie się prawdziwym osiągnięciem dla graczy.
+
+Dzięki takim elementom, gracze będą zachęcani do planowania rozwoju swojej postaci i dokonywania istotnych wyborów podczas rozgrywki, co wprowadzi dodatkowy poziom strategii i wyzwań w grze.
 
 ## 8. Przegrywanie
 
-Przegywa się w momencie w którym życie spadnie do 0 i zaczyna się grę od samego początku nie będzie raczej jakiś drugich szans chyba że jako wzmocnienie z jakimś 5% szans że przywróci postać do życia z np. 50 życia.
+Przegrywanie w grze następuje w momencie, gdy życie postaci spadnie do zera, co skutkuje rozpoczęciem gry od samego początku. W standardowej rozgrywce nie przewiduje się drugich szans, jednak istnieje możliwość wprowadzenia specjalnego wzmocnienia z około 5% szansą, które może przywrócić postać do życia z niewielką ilością punktów życia, na przykład 50 (raczej będzie to dodane później).
 
 ## 9. Styl artystyczny
 
-Jeżeli chodzi o styl to myślę ze będzie to spaczenie (czerwone) na różnych potworach ścianach itd. w sensie im wyższe piętro tym bardziej widoczne.
+Styl artystyczny gry będzie koncentrował się na motywie spaczenia, co oznacza, że elementy takie jak kolor czerwony będą widoczne na różnych elementach, włączając w to potwory, ściany i inny otaczający świat. Stopniowo, w miarę jak gracze będą eksplorować wyższe piętra, efekty spaczenia staną się bardziej wyraźne i intensywne, co wpłynie na atmosferę i wyzwania w grze.
+
+Ten styl artystyczny pozwoli na stworzenie unikalnej i niepowtarzalnej atmosfery, co będzie pasować do tematyki gry związanej z walką z przeklętymi niebem i spaczeniem boskich istot. (Oczywiście to chciałbym dodać na końcu na początku będzie to grafika ascii)
 
 ## 10. Opis techniczny
 
@@ -92,6 +112,6 @@ Na razie brak.
 
 ## 11. Lokalizacje
 
-Lokalizacja będzie w sumie jedna tylko będą się zmieniać piętra no i oczywiście na tych piętrach jakby ściany potowry itd. będą wyglądać inaczej 
+Lokalizacja będzie jedna, tylko będą się zmieniać piętra. Możliwe dodanie w późniejszym etapie dodatkowych przeszkód na piętrach, tak aby urozmaicić rozgrywkę i stworzyć większe wyzwania taktyczne, na przykład całkowite zablokowanie jakiejś ścieżki lub dodanie pułapek.
 
 
