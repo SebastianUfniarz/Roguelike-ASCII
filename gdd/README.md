@@ -12,6 +12,7 @@ Gra jest typowym roguelike'em z kilkoma nowymi elementami, które zazwyczaj nie 
 1. Rozgrywka
 1. Cel
 1. Mechanika gry
+1. Walka
 1. Przedmioty i wzmocnienia
 1. Postęp i Wyzwania
 1. Przegrywanie
@@ -70,7 +71,20 @@ Statystyki postaci: Statystyki postaci, takie jak siła, zręczność i intelige
 
 Statystyki jak i inne rzeczy z tym związane będą w przyszłości dalej rozwijane aby gracz miał więcej możliwości wyboru.
 
-## 6. Przedmioty i wzmocnienia
+## 6. Walka
+Statysyki opisujace walke:
+    health - punkty życia po ich zejściu do 0 dana postac ginie;
+    attack - każda istota będzie miała bazową statytkę ataku zależną od rasy;
+    strength - siła również będzie zależna od rasy i dla każdej rasy będzie działać inaczej (dla niektórych nie będzie ona prawie wcale potrzebna) ale na chwile obecna od siły będzie jakiś przelicznik;
+    dexterity - to samo co dla siły, będzie jedna z statystyk również wpływająca na szanse trafienia;
+    defense -  to będzie statystyka każdego pancerza ona w jakiś sposób będzie redukować otrzymywane obrażenia, każda klasa będzie miała jakiś bazowy defense;
+    intelligence - to samo co siła dla magów;
+    willpower - to raczej dodam później do jakiejś klasy paladyna np.;
+    luck - zwiększająca szanse na unik jak i trafienie;
+    biegłość - będzie to statystyka odpowiadająca za trafienie krytyczne dla każdego rodzaju broni oczywiscie każda klasa będzie miała inne bazowe wartości dla tą biegłość do danej broni będzie można zwiększać poprzez kilku poziomowe wzmocnienia ktróre opisane są poniżej zamiast jakiejś pasywnej zdolności.
+    Walka sama w sobie będzie turowa każda istota będzie miała własną inicjatywe z możliwościa ze jakaś istota po kilku turach będzie w stanie wykonac nawet dwa ataki jezeli jest wystarczajaco szybka. 
+
+## 7. Przedmioty i wzmocnienia
 
 Dostosowane bronie: Każda klasa i rasa będzie miała dostęp do różnych broni, co pozwoli na unikatowe style walki. Na przykład, elfy mogą korzystać z łuków i mieczy, podczas gdy orkowie będą specjalizować się w broniach białych i możliwe że będą posiadać  specjalne umiejętności wzmocnienia bądź dodatkowe umiejętności pasywne.
 
@@ -82,7 +96,7 @@ Różnorodność broni: Spora ilość broni dostosowanych do klas i ras, aby zap
 
 Wszystkie te elementy dostosowane do klas i ras wprowadzą unikalne aspekty rozgrywki, zachęcając graczy do eksperymentowania z różnymi postaciami i strategiami w walce z przeciwnikami oraz eksploracji świata gry.
 
-## 7. Postęp i Wyzwania
+## 8. Postęp i Wyzwania
 
 Rozwijanie postaci będzie klasyczne, polegające na zdobywaniu doświadczenia za każdego pokonanego przeciwnika, co umożliwi zdobywanie poziomów postaci oraz związanych z nimi statystyk.
 
@@ -96,21 +110,21 @@ Takie skalowanie trudności pomoże utrzymać poziom wyzwań i ekscytacji podcza
 
 Dzięki takim elementom, gracze będą zachęcani do planowania rozwoju swojej postaci i dokonywania istotnych wyborów podczas rozgrywki, co wprowadzi dodatkowy poziom strategii i wyzwań w grze.
 
-## 8. Przegrywanie
+## 9. Przegrywanie
 
 Przegrywanie w grze następuje w momencie, gdy życie postaci spadnie do zera, co skutkuje rozpoczęciem gry od samego początku. W standardowej rozgrywce nie przewiduje się drugich szans, jednak istnieje możliwość wprowadzenia specjalnego wzmocnienia z około 5% szansą, które może przywrócić postać do życia z niewielką ilością punktów życia, na przykład 50 (raczej będzie to dodane później).
 
-## 9. Styl artystyczny
+## 10. Styl artystyczny
 
 Styl artystyczny gry będzie koncentrował się na motywie spaczenia, co oznacza, że elementy takie jak kolor czerwony będą widoczne na różnych elementach, włączając w to potwory, ściany i inny otaczający świat. Stopniowo, w miarę jak gracze będą eksplorować wyższe piętra, efekty spaczenia staną się bardziej wyraźne i intensywne, co wpłynie na atmosferę i wyzwania w grze.
 
 Ten styl artystyczny pozwoli na stworzenie unikalnej i niepowtarzalnej atmosfery, co będzie pasować do tematyki gry związanej z walką z przeklętymi niebem i spaczeniem boskich istot. (Oczywiście to chciałbym dodać na końcu na początku będzie to grafika ascii)
 
-## 10. Opis techniczny
+## 11. Opis techniczny
 
 Na razie brak.
 
-## 11. Lokalizacje
+## 12. Lokalizacje
 
 Lokalizacja będzie jedna, tylko będą się zmieniać piętra. Możliwe dodanie w późniejszym etapie dodatkowych przeszkód na piętrach, tak aby urozmaicić rozgrywkę i stworzyć większe wyzwania taktyczne, na przykład całkowite zablokowanie jakiejś ścieżki lub dodanie pułapek.
 
