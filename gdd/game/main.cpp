@@ -6,7 +6,7 @@
 #include <cctype>
 #include <algorithm>
 #include <iomanip>
-#include <windows.h>
+
 
 const int WIDTH = 50;
 const int HEIGHT = 20;
@@ -36,8 +36,8 @@ public:
     Stats stats;
 
     bool operator==(const Characters& other) const {
-           return (x == other.x) && (y == other.y);
-       }
+        return (x == other.x) && (y == other.y);
+    }
 
     Characters() : symbol(' '), x(0), y(0), is_Item(false), name("Hero") {}
 
@@ -51,13 +51,14 @@ std::map<std::string, char> symbols = {
     {"Ogre", 'O'},
     {"Shield", 's'},
     {"Potion", 'p'},
-};
+    };
 
 void display_Options() {
     std::cout << "Movement options:" << std::endl;
     std::cout << "WSAD - move UP, DOWN, LEFT, RIGHT" << std::endl;
-    std::cout << "i - Add item, r - Remove item" << std::endl;
-    std::cout << "n - Add enemy, u - Remove enemy, q - Quit" << std::endl;
+    std::cout << "i - Add item (Enter position (x,y) and item name), r - Remove item" << std::endl;
+    std::cout << "n - Add enemy (Enter position (x y) and enemy name), u - Remove enemy, q - Quit" << std::endl;
+    std::cout << "c - Add walls (type in how many)" << std::endl;
     std::cout << "l - Display statistics" << std::endl;
 }
 
@@ -83,6 +84,8 @@ void display_Character_Stats_Table(const Characters& character) {
 void clear_Screen() {
 #ifdef _WIN32
     system("cls");
+#else
+    system("clear");
 #endif
 }
 
@@ -193,14 +196,12 @@ void add_Item(char map[HEIGHT][WIDTH], std::vector<Characters>& items, int x, in
             break;
         }
     }
-
     Characters item;
     item.symbol = tolower(name[0]);
     item.x = x;
     item.y = y;
     item.is_Item = true;
     item.name = name;
-    item.stats.health = rand() % 50 + 10;
     items.push_back(item);
     map[y][x] = item.symbol;
 }
@@ -249,6 +250,18 @@ void remove_Enemy(char map[HEIGHT][WIDTH], std::vector<Characters>& enemies, int
     }
 }
 
+void add_Walls(char map[HEIGHT][WIDTH], int count){
+    for(int i=0;i<count;i++){
+        int x,y;
+        do {
+            x = rand() % (WIDTH-2)+1;
+            y = rand() % (HEIGHT-2)+1;
+        } while(map[x][y]!='.');
+        map[x][y]='#';
+    }
+
+}
+
 int main() {
     std::ios_base::sync_with_stdio(false);
     std::cin.tie(nullptr);
@@ -274,30 +287,32 @@ int main() {
         }
 
         if (input == 'i') {
-            std::cout << "Enter position (x y) and item name: ";
             int x, y;
             std::string name;
             std::cin >> x >> y >> name;
             add_Item(map, items, x, y, name);
         }
         else if (input == 'r') {
-            std::cout << "Enter position (x y) to remove item: ";
             int x, y;
             std::cin >> x >> y;
             remove_Item(map, items, x, y);
         }
         else if (input == 'n') {
-            std::cout << "Enter position (x y) and enemy name: ";
             int x, y;
             std::string name;
             std::cin >> x >> y >> name;
             add_Enemy(map, enemies, x, y, name);
         }
         else if (input == 'u') {
-            std::cout << "Enter position (x y) to remove enemy: ";
             int x, y;
             std::cin >> x >> y;
             remove_Enemy(map, enemies, x, y);
+        }
+
+        else if (input == 'c') {
+            int count;
+            std::cin >> count;
+            add_Walls(map, count);
         }
         else if (input == 'l') {
             display_Character_Stats_Table(hero);
