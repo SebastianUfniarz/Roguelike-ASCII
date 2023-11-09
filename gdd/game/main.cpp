@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <iomanip>
 
+using namespace std;
 
 const int WIDTH = 50;
 const int HEIGHT = 20;
@@ -57,7 +58,7 @@ void display_Options() {
     std::cout << "Movement options:" << std::endl;
     std::cout << "WSAD - move UP, DOWN, LEFT, RIGHT" << std::endl;
     std::cout << "i - Add item (Enter position (x,y) and item name), r - Remove item" << std::endl;
-    std::cout << "n - Add enemy (Enter position (x y) and enemy name), u - Remove enemy, q - Quit" << std::endl;
+    std::cout << "n - Add enemy (Enter position (x,y) and enemy name), u - Remove enemy, q - Quit" << std::endl;
     std::cout << "c - Add walls (type in how many)" << std::endl;
     std::cout << "l - Display statistics" << std::endl;
 }
@@ -186,7 +187,7 @@ void move_Character(char map[HEIGHT][WIDTH], Characters& character, int newX, in
 void add_Item(char map[HEIGHT][WIDTH], std::vector<Characters>& items, int x, int y, const std::string& name) {
     for (const Characters& item : items) {
         if (item.x == x && item.y == y) {
-            std::cout << "This place is already occupied by an item." << std::endl;
+            cout << "This place is already occupied by an item." << std::endl;
             return;
         }
 
@@ -266,6 +267,7 @@ int main() {
     std::ios_base::sync_with_stdio(false);
     std::cin.tie(nullptr);
     std::cout.tie(nullptr);
+
     srand(static_cast<unsigned int>(time(nullptr)));
 
     char map[HEIGHT][WIDTH];
@@ -327,11 +329,14 @@ int main() {
 
         if (input == 'w') {
             newY--;
-        } else if (input == 's') {
+        }
+        else if (input == 's') {
             newY++;
-        } else if (input == 'a') {
+        }
+        else if (input == 'a') {
             newX--;
-        } else if (input == 'd') {
+        }
+        else if (input == 'd') {
             newX++;
         }
 
