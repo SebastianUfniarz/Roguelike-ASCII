@@ -41,40 +41,75 @@ public:
     int health;
     int strength;
     int dexterity;
-    int stamina;
     int intelligence;
     int wisdom;
     int mana;
     int proficiency;
+    int armor;
 
-    CharacterStats(int health_, int strength_, int dexterity_, int stamina_, int intelligence_,
-                   int wisdom_,int mana_, int proficiency_)
-        : health(health_), strength(strength_), dexterity(dexterity_), stamina(stamina_),
-          intelligence(intelligence_), wisdom(wisdom_),mana(mana_),
-             proficiency(proficiency_) {}
+    int evasionCount;  // Licznik uników
+    int criticalStrikeCount;  // Licznik ciosów krytycznych
+
+       CharacterStats(int health_, int strength_, int dexterity_, int intelligence_,
+                      int wisdom_, int mana_, int proficiency_, int armor_)
+           : health(health_), strength(strength_), dexterity(dexterity_),
+             intelligence(intelligence_), wisdom(wisdom_), mana(mana_),
+             proficiency(proficiency_), armor(armor_), evasionCount(0), criticalStrikeCount(0) {}
 };
-CharacterStats generateRandomStats() {
-        // Losujemy statystyki w sensownym zakresie
-        return CharacterStats(
-            rand() % 501 + 500,  // Health: 50-100
-            rand() % 11 + 10,  // Strength: 10-20
-            rand() % 6 + 5,    // Dexterity: 5-10
-            rand() % 11 + 10,  // Stamina: 10-20
-            rand() % 6 + 5,    // Intelligence: 5-10
-            rand() % 6 + 5,    // Wisdom: 5-10
-            rand() % 101 + 100,  // Charisma: 10-20
-            rand() % 6 + 5   // Proficiency: 60-100
-        );
-    };
+CharacterStats generateRandomStatsForEnemy(const std::string& enemyName) {
+    int health = 0, strength = 0, dexterity = 0, intelligence = 0, wisdom= 0, mana = 0, proficiency = 0, armor=0;
+
+    if (enemyName == "Rat") {
+            health = rand() % 21 + 30;
+            strength = 5;
+            dexterity = rand() % 11 + 10;
+            intelligence = 5;
+            wisdom = 5;
+            mana = 100;
+            proficiency = rand() % 6 + 5;
+            armor = 0;
+        }
+        else if (enemyName == "Goblin") {
+            health = rand() % 31 + 30;
+            strength = rand() % 6 + 5;
+            dexterity = rand() % 16 + 15;
+            intelligence = 5;
+            wisdom = rand() % 6 + 5;
+            mana = 100;
+            proficiency = rand() % 11 + 10;
+            armor = 5;
+        }
+        else if (enemyName == "Ogre") {
+            health = rand() % 41 + 80;
+            strength = rand() % 21 + 10;
+            dexterity = 5;
+            intelligence = 5;
+            wisdom = 5;
+            mana = 100;
+            proficiency = rand() % 16 + 15;
+            armor = 5;
+        }
+        else if (enemyName == "hero") {
+            health = rand() % 31 + 40;
+            strength = rand() % 11 + 10;
+            dexterity = rand() % 11 + 10;
+            intelligence = rand() % 6 + 5;
+            wisdom = rand() % 6 + 5;
+            mana = 100;
+            proficiency = rand() % 21 + 20;
+            armor = 10;
+        }
+
+    return CharacterStats(health, strength, dexterity, intelligence, wisdom, mana, proficiency, armor);
+}
 class Character : public Field {
 public:
     bool is_Item;
     std::string name;
     CharacterStats stats;
-    int stamina;
 
     Character(char sym, int x_, int y_, bool item, const std::string& name_, const CharacterStats& stats_)
-        : Field(sym, x_, y_), is_Item(item), name(name_), stats(stats_), stamina(100) {}
+        : Field(sym, x_, y_), is_Item(item), name(name_), stats(stats_) {}
 
     virtual void display() const override {
         std::cout << symbol;
@@ -90,6 +125,11 @@ public:
             stats.health = 0;
         }
     }
+
+    float calculateDamageReduction(const Character& enemy) const {
+            const float armorHardness = 50.0;
+            return enemy.stats.armor / (enemy.stats.armor + armorHardness);
+        }
 
     void heal(int healingPoints) {
         stats.health += healingPoints;
@@ -107,6 +147,7 @@ public:
     }
 
     bool evadeAttack() {
+
         int maxEvasionChance = 50;
         int baseEvasionChance = 2;
         int evasionChance = std::min(stats.dexterity, maxEvasionChance);
@@ -136,9 +177,11 @@ public:
 
     void attack(Character& target) {
         if (target.evadeAttack()) {
+            ++stats.evasionCount;
             std::cout << target.name << " evaded the attack." << std::endl;
         }
         else if(target.criticalStrike()){
+            ++stats.criticalStrikeCount;
             int baseMinDamage = 5;
             int damageRange = 2;
 
@@ -148,7 +191,7 @@ public:
             int damage = rand() % (maxDamage - minDamage + 1) + minDamage;
             target.receiveDamage(damage*2);
 
-            std::cout << name << " Landed critical strike " << target.name << " for " << damage << " damage." << std::endl;
+            std::cout << name << " Landed critical strike on " << target.name << " for " << damage << " damage." << std::endl;
         }
         else {
             int baseMinDamage = 5;
@@ -156,9 +199,10 @@ public:
 
             int minDamage = baseMinDamage + (stats.strength - 5) * damageRange;
             int maxDamage = minDamage + stats.strength;
-
+            float damageReduction = calculateDamageReduction(target);
             int damage = rand() % (maxDamage - minDamage + 1) + minDamage;
-            target.receiveDamage(damage);
+            int finalDamage = static_cast<int>(damage * (1.0 - damageReduction));
+            target.receiveDamage(finalDamage);
 
             std::cout << name << " attacked " << target.name << " for " << damage << " damage." << std::endl;
         }
@@ -219,7 +263,7 @@ public:
 
     void display() const {
             std::cout << "Options:" << std::endl;
-            std::cout << "1 - Display map, 2 - Enter fight mode" << std::endl;
+            std::cout << "9 - Display map, 2 - Enter fight mode" << std::endl;
 
             if (!fightMode) {
                 for (int y = 0; y < HEIGHT; y++) {
@@ -298,20 +342,20 @@ public:
     }
 
     void addEnemy(int x, int y, const std::string& name) {
-            if (isValidPosition(x, y)) {
-                Field* field = fields[y][x];
+           if (isValidPosition(x, y)) {
+               Field* field = fields[y][x];
 
-                if (field && field->symbol == '.' && field->items.empty()) {
-                    delete fields[y][x];
-                    fields[y][x] = new Character(toupper(name[0]), x, y, false, name, generateRandomStats());
-                    enemiesList.push_back(*static_cast<Character*>(fields[y][x]));
+               if (field && field->symbol == '.' && field->items.empty()) {
+                   delete fields[y][x];
+                   fields[y][x] = new Character(toupper(name[0]), x, y, false, name, generateRandomStatsForEnemy(name));
+                   enemiesList.push_back(*static_cast<Character*>(fields[y][x]));
 
-                    std::cout << "Dodano przeciwnika: " << name << " na pozycji (" << x << ", " << y << ")" << std::endl;
-                }
-            } else {
-                std::cout << "Nie można dodać przeciwnika poza granicami mapy." << std::endl;
-            }
-        }
+                   std::cout << "Dodano przeciwnika: " << name << " na pozycji (" << x << ", " << y << ")" << std::endl;
+               }
+           } else {
+               std::cout << "Nie można dodać przeciwnika poza granicami mapy." << std::endl;
+           }
+       }
 
 
     void addRandomWalls(int numWalls) {
@@ -401,7 +445,7 @@ public:
         }
 
         // Przykładowe statystyki bohatera
-              addCharacter(new Character('@', 10, 5, false, "Hero", CharacterStats(100, 15, 10,25,0, 30, 5, 80)));
+              addCharacter(new Character('@', 10, 5, false, "Hero", CharacterStats(100, 15, 10,25,0, 5, 80, 10)));
 
               addItem(15, 10, "Shield");
               addItem(15, 10, "Sword");
@@ -428,7 +472,7 @@ public:
 
     void handleInput(char input) {
         switch (input) {
-            case '1':
+            case '9':
                 fightMode = false;
                 break;
             case '2':
@@ -536,30 +580,52 @@ void Map::testCombat() {
 
     int choice;
     std::cin >> choice;
-
-    CharacterStats enemyStats = generateRandomStats();
     std::string enemyName;
+    CharacterStats enemyStats = generateRandomStatsForEnemy(enemyName); ;
+
 
     switch (choice) {
-        case 1:
-            enemyName = "Ogre";
-            enemyStats = generateRandomStats();  // lub użyj już zdefiniowanych statystyk
-            break;
-        case 2:
-            enemyName = "Goblin";
-            enemyStats = generateRandomStats();  // lub użyj już zdefiniowanych statystyk
-            break;
-        case 3:
-            enemyName = "Rat";
-            enemyStats = generateRandomStats();  // lub użyj już zdefiniowanych statystyk
-            break;
-        // Dodaj inne przypadki dla innych przeciwników
-        default:
-            std::cout << "Invalid choice. Exiting combat testing mode." << std::endl;
-            return;
-    }
+           case 1:
+               enemyName = "Ogre";
+               enemyStats = generateRandomStatsForEnemy(enemyName);
+               break;
+           case 2:
+               enemyName = "Goblin";
+               enemyStats = generateRandomStatsForEnemy(enemyName);
+               break;
+           case 3:
+               enemyName = "Rat";
+               enemyStats = generateRandomStatsForEnemy(enemyName);
+               break;
 
-    // Przykładowe statystyki dla wybranego przeciwnika
+           default:
+               std::cout << "Invalid choice. Exiting combat testing mode." << std::endl;
+               return;
+       }
+    Character attacker('A', 5, 5, false, "Attacker", generateRandomStatsForEnemy("hero"));
+    std::cout << "-------------------------------------------------------------" << std::endl;
+    std::cout << "Attacker Stats:" << std::endl;
+    std::cout << "  Health: " << attacker.stats.health << std::endl;
+    std::cout << "  Strength: " << attacker.stats.strength << std::endl;
+    std::cout << "  Dexterity: " << attacker.stats.dexterity << std::endl;
+    std::cout << "  Intelligence: " << attacker.stats.intelligence << std::endl;
+    std::cout << "  Wisdom: " << attacker.stats.wisdom << std::endl;
+    std::cout << "  Mana: " << attacker.stats.mana << std::endl;
+    std::cout << "  Proficiency: " << attacker.stats.proficiency << std::endl;
+    std::cout << "  Armor: " << attacker.stats.armor << std::endl;
+    std::cout << "-------------------------------------------------------------" << std::endl;
+    std::cout << "Enemy Stats:" << std::endl;
+    std::cout << "  Health: " << enemyStats.health << std::endl;
+    std::cout << "  Strength: " << enemyStats.strength << std::endl;
+    std::cout << "  Dexterity: " << enemyStats.dexterity << std::endl;
+    std::cout << "  Intelligence: " << enemyStats.intelligence << std::endl;
+    std::cout << "  Wisdom: " << enemyStats.wisdom << std::endl;
+    std::cout << "  Mana: " << enemyStats.mana << std::endl;
+    std::cout << "  Proficiency: " << enemyStats.proficiency << std::endl;
+    std::cout << "  Armor: " << enemyStats.armor << std::endl;
+    std::cout << "-------------------------------------------------------------" << std::endl;
+
+
     Character enemy(enemyName[0], 7, 5, false, enemyName, enemyStats);
 
     int numTests;
@@ -568,9 +634,13 @@ void Map::testCombat() {
 
     int attackerWins = 0;
     int enemyWins = 0;
+    int totalAttackerEvasion = 0;
+    int totalAttackerCriticalStrike = 0;
+    int totalEnemyEvasion = 0;
+    int totalEnemyCriticalStrike = 0;
 
     for (int i = 0; i < numTests; ++i) {
-        Character attacker('A', 5, 5, false, "Attacker", generateRandomStats());
+        Character attacker('A', 5, 5, false, "Attacker", generateRandomStatsForEnemy("hero"));
         Character testEnemy(enemyName[0], 7, 5, false, enemyName, enemyStats);
 
         while (attacker.isAlive() && testEnemy.isAlive()) {
@@ -591,11 +661,20 @@ void Map::testCombat() {
             std::cout <<"("<< testEnemy.name << "," << testEnemy.getHealth() << "," << attacker.name << ")" << std::endl;
             ++enemyWins;
         }
+        totalAttackerEvasion += attacker.stats.evasionCount;
+        totalAttackerCriticalStrike += attacker.stats.criticalStrikeCount;
+        totalEnemyEvasion += testEnemy.stats.evasionCount;
+        totalEnemyCriticalStrike += testEnemy.stats.criticalStrikeCount;
     }
-
+    std::cout << std::endl;
     std::cout << "Results:" << std::endl;
     std::cout << "Attacker Wins: " << attackerWins << std::endl;
     std::cout << "Enemy Wins: " << enemyWins << std::endl;
+    std::cout << "Attacker Evasion Count: " << totalAttackerEvasion << std::endl;
+    std::cout << "Attacker Critical Strike Count: " << totalAttackerCriticalStrike << std::endl;
+    std::cout << "Enemy Evasion Count: " << totalEnemyEvasion << std::endl;
+    std::cout << "Enemy Critical Strike Count: " << totalEnemyCriticalStrike << std::endl;
+    std::cout << std::endl;
 }
 
 int main() {

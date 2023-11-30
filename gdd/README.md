@@ -72,17 +72,53 @@ Statystyki postaci: Statystyki postaci, takie jak siła, zręczność i intelige
 Statystyki jak i inne rzeczy z tym związane będą w przyszłości dalej rozwijane aby gracz miał więcej możliwości wyboru.
 
 ## 6. Walka
-Statysyki opisujace walke:
-    health - punkty życia po ich zejściu do 0 dana postac ginie;
-    attack - każda istota będzie miała bazową statytkę ataku zależną od rasy;
-    strength - siła również będzie zależna od rasy i dla każdej rasy będzie działać inaczej (dla niektórych nie będzie ona prawie wcale potrzebna) ale na chwile obecna od siły będzie jakiś przelicznik;
-    dexterity - to samo co dla siły, będzie jedna z statystyk również wpływająca na szanse trafienia;
-    defense -  to będzie statystyka każdego pancerza ona w jakiś sposób będzie redukować otrzymywane obrażenia, każda klasa będzie miała jakiś bazowy defense;
-    intelligence - to samo co siła dla magów;
-    willpower - to raczej dodam później do jakiejś klasy paladyna np.;
-    luck - zwiększająca szanse na unik jak i trafienie;
-    biegłość - będzie to statystyka odpowiadająca za trafienie krytyczne dla każdego rodzaju broni oczywiscie każda klasa będzie miała inne bazowe wartości dla tą biegłość do danej broni będzie można zwiększać poprzez kilku poziomowe wzmocnienia ktróre opisane są poniżej zamiast jakiejś pasywnej zdolności.
-    Walka sama w sobie będzie turowa każda istota będzie miała własną inicjatywe z możliwościa ze jakaś istota po kilku turach będzie w stanie wykonac nawet dwa ataki jezeli jest wystarczajaco szybka. 
+### Statystyki postaci:
+Health (Zdrowie): Określa ilość punktów życia postaci. Gdy zdrowie spadnie do 0, postać umiera.
+
+Strength (Siła): Wpływa na zadawane obrażenia podczas ataku fizycznego.
+
+Dexterity (Zręczność): Wpływa na szanse uniknięcia ataku przeciwnika.
+
+Intelligence (Inteligencja): Może wpływać na zdolności magiczne postaci (chociaż w obecnym kodzie jest ustawione na stałą wartość).
+
+Wisdom (Mądrość): Może wpływać na odporność psychiczną postaci (chociaż w obecnym kodzie jest ustawione na stałą wartość).
+
+Mana: Określa ilość punktów many, które są potrzebne do korzystania z umiejętności magicznych (chociaż w obecnym kodzie jest ustawione na stałą wartość).
+
+Proficiency (Biegłość): Wpływa na szanse zadania krytycznego podczas ataku.
+
+Armor (Pancerz): Określa zdolność postaci do redukcji obrażeń od ataków fizycznych. Im wyższa wartość pancerza, tym mniejsze obrażenia zadawane przez przeciwników.
+
+
+
+### Walka:
+Atak:
+
+Postać atakująca losuje obrażenia w zależności od siły. Im wyższa siła, tym większe obrażenia.
+Unikanie Ataku:
+
+Postać atakowana ma szansę na uniknięcie ataku zależną od jej zręczności. Im wyższa zręczność, tym większa szansa na uniknięcie.
+Krytyczny Cios:
+
+Szansa na zadanie krytycznego ciosu zależy od biegłości postaci. Im wyższa biegłość, tym większa szansa na krytyczny cios. Krytyczny cios podwaja zadane obrażenia.
+
+Redukcja Obrażeń z Użyciem Pancerza:
+
+W chwili ataku, wartość pancerza przeciwnika jest uwzględniana w procesie redukcji obrażeń.
+Im wyższa wartość pancerza, tym większa zdolność postaci do zmniejszenia otrzymywanych obrażeń.
+Procentowa Redukcja:
+
+Redukcja obrażeń związana z pancerzem jest wyrażana procentowo.
+Wysoka wartość pancerza oznacza większą procentową redukcję obrażeń, co przekłada się na mniejsze otrzymane obrażenia od ataków.
+
+Ogólne Zasady:
+
+Zdrowie postaci atakowanej jest zmniejszane o zadane obrażenia.
+Gdy zdrowie spadnie do 0, postać atakowana umiera.
+Istnieje szansa, że postać atakowana uniknie ataku.
+Istnieje szansa, że postać atakująca zadaje krytyczne obrażenia.
+
+Ogólnie rzecz biorąc, walka w grze opiera się na losowości (np. losowanie obrażeń, szansa na uniknięcie ataku, szansa na krytyczny cios), a statystyki postaci wpływają na te szanse oraz na ilość zadawanych obrażeń. Gracz będzie musiał strategicznie zarządzać postaciami, wykorzystując ich unikalne statystyki do skutecznego przetrwania i pokonywania przeciwników.
 
 ## 7. Przedmioty i wzmocnienia
 
