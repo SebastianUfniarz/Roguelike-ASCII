@@ -2,15 +2,149 @@
 #include <iostream>
 #include <vector>
 
+class Map;
+class Character;
+
+enum class EquipmentSlot {
+    Head,
+    Chest,
+    Shoulders,
+    LeftArm,
+    RightArm,
+    Belt,
+    Legs,
+    Boots,
+    Ring1,
+    Ring2
+};
+
+enum class ItemType {
+    Helmet,
+    Sword,
+    Bow,
+    // dodaj inne typy przedmiotów, jakie potrzebujesz
+};
+
 class Item {
 public:
     char symbol;
     std::string name;
     int x;
     int y;
-
-    Item(char sym, const std::string& name_, int x_, int y_) : symbol(sym), name(name_), x(x_), y(y_) {}
+    ItemType type;  // Dodane pole określające typ przedmiotu
+    Item(char sym, const std::string& name_, int x_, int y_, ItemType type_)
+           : symbol(sym), name(name_), x(x_), y(y_), type(type_) {}
 };
+
+class Weapon : public Item {
+public:
+    enum class WeaponType {
+        Sword,
+        Axe,
+        Bow
+    };
+
+    WeaponType weaponType;
+
+    Weapon(char sym, const std::string& name_, int x_, int y_, WeaponType type_)
+        : Item(sym, name_, x_, y_, ItemType::Sword), weaponType(type_) {}
+};
+
+class Armor : public Item {
+public:
+    enum class ArmorType {
+        Helmet,
+        Chestplate,
+        Leggings,
+        Boots
+    };
+
+    ArmorType armorType;
+
+    Armor(char sym, const std::string& name_, int x_, int y_, ArmorType type_)
+        : Item(sym, name_, x_, y_, ItemType::Helmet), armorType(type_) {}
+};
+
+class Equipment {
+public:
+    struct EquippedItem {
+        EquipmentSlot slot;
+        Item item;
+    };
+
+    struct EquippedWeapon {
+        EquipmentSlot slot;
+        Weapon weapon;
+    };
+
+private:
+    std::vector<EquippedItem> equippedItems;
+    std::vector<EquippedWeapon> equippedWeapons;
+
+public:
+    Equipment() {}
+
+    bool equipItem(EquipmentSlot slot, const Item& item) {
+        // Sprawdź, czy slot jest wolny
+        for (const auto& equippedItem : equippedItems) {
+            if (equippedItem.slot == slot) {
+                std::cout << "Slot " << getSlotName(slot) << " jest juz zajety." << std::endl;
+                return false;
+            }
+        }
+
+        // Dodaj przedmiot do ekwipunku
+        equippedItems.push_back({slot, item});
+        std::cout << "Zalozono przedmiot " << item.name << " do slotu " << getSlotName(slot) << "." << std::endl;
+        return true;
+    }
+
+    bool equipWeapon(EquipmentSlot slot, const Weapon& weapon) {
+        // Sprawdź, czy slot na broń jest wolny
+        for (const auto& equippedWeapon : equippedWeapons) {
+            if (equippedWeapon.slot == slot) {
+                std::cout << "Slot " << getSlotName(slot) << " na bron jest już zajety." << std::endl;
+                return false;
+            }
+        }
+
+        // Dodaj broń do ekwipunku
+        equippedWeapons.push_back({slot, weapon});
+        std::cout << "Zalozono bron " << weapon.name << " do slotu " << getSlotName(slot) << "." << std::endl;
+        return true;
+    }
+
+    void displayEquippedItems() const {
+            std::cout << "Ekwipunek:" << std::endl;
+            for (const auto& equippedItem : equippedItems) {
+                std::cout << getSlotName(equippedItem.slot) << ": " << equippedItem.item.name << std::endl;
+            }
+        }
+
+        void displayEquippedWeapons() const {
+            std::cout << "Bron:" << std::endl;
+            for (const auto& equippedWeapon : equippedWeapons) {
+                std::cout << getSlotName(equippedWeapon.slot) << ": " << equippedWeapon.weapon.name << std::endl;
+            }
+        }
+
+        static std::string getSlotName(EquipmentSlot slot) {
+            switch (slot) {
+                case EquipmentSlot::Head: return "Glowa";
+                case EquipmentSlot::Chest: return "Klatka piersiowa";
+                case EquipmentSlot::Shoulders: return "Barki";
+                case EquipmentSlot::LeftArm: return "Lewa reka";
+                case EquipmentSlot::RightArm: return "Prawa reka";
+                case EquipmentSlot::Belt: return "Pas";
+                case EquipmentSlot::Legs: return "Spodnie";
+                case EquipmentSlot::Boots: return "Buty";
+                case EquipmentSlot::Ring1: return "Pierścień 1";
+                case EquipmentSlot::Ring2: return "Pierścień 2";
+                default: return "Nieznany slot";
+            }
+        }
+    };
+
 
 class Field {
 public:
@@ -102,11 +236,13 @@ CharacterStats generateRandomStatsForEnemy(const std::string& enemyName) {
 
     return CharacterStats(health, strength, dexterity, intelligence, wisdom, mana, proficiency, armor);
 }
+
 class Character : public Field {
 public:
     bool is_Item;
     std::string name;
     CharacterStats stats;
+    Equipment equipment;
 
     Character(char sym, int x_, int y_, bool item, const std::string& name_, const CharacterStats& stats_)
         : Field(sym, x_, y_), is_Item(item), name(name_), stats(stats_) {}
@@ -207,6 +343,14 @@ public:
             std::cout << name << " attacked " << target.name << " for " << damage << " damage." << std::endl;
         }
     }
+    void equipItem(EquipmentSlot slot, const Item& item) {
+            equipment.equipItem(slot, item);
+        }
+
+        void equipWeapon(EquipmentSlot slot, const Weapon& weapon) {
+            equipment.equipWeapon(slot, weapon);
+        }
+    void pickupItem(Map& gameMap);
 
 };
 
@@ -239,13 +383,11 @@ public:
     static const int WIDTH = 50;
     static const int HEIGHT = 20;
 
-private:
+public:
     std::vector<std::vector<Field*>> fields;
     std::vector<Item> itemsList;
     std::vector<Character> enemiesList;
     Character* hero;
-
-public:
     bool fightMode= false;
     Map() : hero(nullptr) {
         fields.resize(HEIGHT, std::vector<Field*>(WIDTH, nullptr));
@@ -323,16 +465,29 @@ public:
         return isValidPosition(x, y) && fields[y][x]->isPassable();
     }
 
-    void addItem(int x, int y, const std::string& name) {
+    void addItem(int x, int y, const std::string& name, ItemType type) {
         if (isValidPosition(x, y)) {
             Field* field = fields[y][x];
 
             if (field && field->symbol == '.' && field->items.empty()) {
-                Item newItem(tolower(name[0]), name, x, y);
-                field->items.push_back(newItem);
-                field->symbol = newItem.symbol;
+                Item newItem(tolower(name[0]), name, x, y, type);
 
+                // W zależności od typu przedmiotu, możesz utworzyć odpowiednią klasę pochodną
+                switch (type) {
+                    case ItemType::Helmet:
+                        field->items.push_back(Armor(tolower(name[0]), name, x, y, Armor::ArmorType::Helmet));
+                        break;
+                    case ItemType::Sword:
+                        field->items.push_back(Weapon(tolower(name[0]), name, x, y, Weapon::WeaponType::Sword));
+                        break;
+                        // Dodaj obsługę innych typów przedmiotów
+                case ItemType::Bow:
+                    break;
+                }
+
+                field->symbol = newItem.symbol;
                 itemsList.push_back(newItem);
+
                 std::cout << "Dodano przedmiot: " << newItem.name << " na pozycji (" << newItem.x << ", " << newItem.y << ")"
                           << std::endl;
             }
@@ -447,8 +602,15 @@ public:
         // Przykładowe statystyki bohatera
               addCharacter(new Character('@', 10, 5, false, "Hero", CharacterStats(100, 15, 10,25,0, 5, 80, 10)));
 
-              addItem(15, 10, "Shield");
-              addItem(15, 10, "Sword");
+              Weapon bow('B', "Bow", 0, 0, Weapon::WeaponType::Bow);
+              addItem(15, 10,"Sword of Luck", ItemType::Sword );
+
+
+
+
+              // Wyświetlanie ekwipunku
+              hero->equipment.displayEquippedItems();
+              hero->equipment.displayEquippedWeapons();
 
               // Przykładowe statystyki przeciwnika
               addEnemy(20, 15, "Ogre");
@@ -501,12 +663,24 @@ public:
                 std::cout << "Podaj nazwę przedmiotu: ";
                 std::string itemName;
                 std::cin >> itemName;
+
                 std::cout << "Podaj współrzędne przedmiotu (x y): ";
                 int itemX, itemY;
                 std::cin >> itemX >> itemY;
-                addItem(itemX, itemY, itemName);
-                break;
+
+                std::cout << "Podaj typ przedmiotu (0 - Helmet, 1 - Sword, 2 - Bow, itp.): ";
+                int itemTypeInt;
+                std::cin >> itemTypeInt;
+
+                ItemType itemType = static_cast<ItemType>(itemTypeInt);
+
+                addItem(itemX, itemY, itemName, itemType);
+                    break;
             }
+            case 'p':
+
+                   hero->equipment.displayEquippedItems();
+                   break;
             case 'u': {
                 std::cout << "Podaj współrzędne przedmiotu do usunięcia (x y): ";
                 int itemX, itemY;
@@ -514,6 +688,7 @@ public:
                 removeItem(itemX, itemY);
                 break;
             }
+
             case 'n': {
                 std::cout << "Podaj nazwę przeciwnika: ";
                 std::string enemyName;
@@ -543,7 +718,7 @@ public:
         }
     }
 
-private:
+
     bool isValidPosition(int x, int y) const {
         return x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT;
     }
@@ -677,6 +852,46 @@ void Map::testCombat() {
     std::cout << std::endl;
 }
 
+void Character::pickupItem(Map& gameMap) {
+
+    // Sprawdź, czy bohater stoi na polu z przedmiotem
+    if (!gameMap.isValidPosition(x, y) || gameMap.fields[y][x]->items.empty()) {
+        std::cout << "Nie ma przedmiotu do podniesienia na tym polu." << std::endl;
+        return;
+    }
+
+    // Pobierz przedmiot z pola
+    Item& item = gameMap.fields[y][x]->items.back();
+
+    // Sprawdź, czy bohater ma miejsce w ekwipunku
+    if (item.symbol == 'H' || item.symbol == 'S' || item.symbol == 'B') {
+        // Podniesienie przedmiotu do odpowiedniego slota
+        EquipmentSlot slot;
+        switch (item.symbol) {
+            case 'H': slot = EquipmentSlot::Head; break;
+            case 'S': slot = EquipmentSlot::LeftArm; break;
+            case 'B': slot = EquipmentSlot::RightArm; break;
+            // Dodaj inne przypadki dla różnych rodzajów przedmiotów
+            default: return;
+        }
+
+        // Spróbuj założyć przedmiot
+        if (equipment.equipItem(slot, item)) {
+                    // Usuń przedmiot z pola
+                    gameMap.fields[y][x]->items.pop_back();
+                    // Zaktualizuj symbol na mapie
+                    gameMap.fields[y][x]->symbol = 's';
+                    // Wyświetl informację o podniesieniu przedmiotu
+                    std::cout << "Podniesiono przedmiot: " << item.name << " i założono do slotu " << Equipment::getSlotName(slot) << "." << std::endl;
+        } else {
+            std::cout << "Brak miejsca w ekwipunku na ten przedmiot." << std::endl;
+        }
+    } else {
+        // Przedmiot nie jest bronią ani elementem ekwipunku, możesz dodać tu inne przypadki, jeśli są potrzebne
+        std::cout << "Ten przedmiot nie jest bronią ani elementem ekwipunku." << std::endl;
+    }
+}
+
 int main() {
     Map gameMap;
 
@@ -693,6 +908,7 @@ int main() {
             char input;
             std::cin >> input;
             gameMap.handleInput(input);
+            gameMap.hero->pickupItem(gameMap);
         } else {
             gameMap.testCombat();
         }
