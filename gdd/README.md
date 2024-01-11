@@ -79,7 +79,7 @@ Strength (Siła): Wpływa na zadawane obrażenia podczas ataku fizycznego.
 
 Dexterity (Zręczność): Wpływa na szanse uniknięcia ataku przeciwnika.
 
-Intelligence (Inteligencja): Może wpływać na zdolności magiczne postaci (chociaż w obecnym kodzie jest ustawione na stałą wartość).
+Intelligence (Inteligencja): Może wpływać na zdolności magiczne postaci.
 
 Wisdom (Mądrość): Może wpływać na odporność psychiczną postaci (chociaż w obecnym kodzie jest ustawione na stałą wartość).
 
@@ -95,9 +95,11 @@ Armor (Pancerz): Określa zdolność postaci do redukcji obrażeń od ataków fi
 Atak:
 
 Postać atakująca losuje obrażenia w zależności od siły. Im wyższa siła, tym większe obrażenia.
+
 Unikanie Ataku:
 
 Postać atakowana ma szansę na uniknięcie ataku zależną od jej zręczności. Im wyższa zręczność, tym większa szansa na uniknięcie.
+
 Krytyczny Cios:
 
 Szansa na zadanie krytycznego ciosu zależy od biegłości postaci. Im wyższa biegłość, tym większa szansa na krytyczny cios. Krytyczny cios podwaja zadane obrażenia.
@@ -106,6 +108,7 @@ Redukcja Obrażeń z Użyciem Pancerza:
 
 W chwili ataku, wartość pancerza przeciwnika jest uwzględniana w procesie redukcji obrażeń.
 Im wyższa wartość pancerza, tym większa zdolność postaci do zmniejszenia otrzymywanych obrażeń.
+
 Procentowa Redukcja:
 
 Redukcja obrażeń związana z pancerzem jest wyrażana procentowo.
@@ -126,7 +129,21 @@ Dostosowane bronie: Każda klasa i rasa będzie miała dostęp do różnych bron
 
 Unikalne umiejętności i wzmocnienia: Rasy i klasy będą posiadać unikalne umiejętności pasywne(na razie chciałbym się skupić na pasywnych) lub aktywne, które wpłyną na ich zdolności w walce i poza nią. To dodatkowo urozmaici strategię i styl rozgrywki dla różnych postaci.
 
-Brak zbroi i akcesoriów. (na ten moment, pewnie zostaną dodane później)
+Ekwipunek:
+
+Ma kilka elementow:
+Glowa (hełmy, przepaski itd.) - daja dodatkowy pancerz, mniejsza ilość statysyk
+Barki (naramieniki) - daja dodatkowy pancerz, mniejsza ilość statysyk
+Klatka piersiowa (pancerz, szaty itd.) daja dodatkowy pancerz, średnia ilość statysyk
+lewa ręka, prawa ręka (lewa to broń, prawa to kołczan, tarcze itd.) - Dodatkowe bazowe punkty obrażen jeżeli chodzi o broń, natomiast prawa ręka czyli przedmioty dodatkowe takie jak tarcza, kołczan  itd. dają bonusy + statysyki w przypadku tarczy szansze na całkowite zablokowanie obrażeń, kołczaam więcej strzał.
+Pierścionki (tylko 2) - dają tylko statystyki
+Pasek - daje tylko statysyki głównie do siły
+Spodnie - pancerz, mniejsza ilość statysyk
+Buty - pancerz, potencjalne zwiększenie szybkośći (nie ma jeszcze jej w grze).
+
+Plecak:
+
+7 miejsc na przedmioty nie ma znaczenia jakiego typu mogą to być strzały itd.
 
 Różnorodność broni: Spora ilość broni dostosowanych do klas i ras, aby zapewnić graczom szeroki wybór. Każda klasa i rasa będzie miała dostęp do specjalnych broni, co pozwoli na eksperymentowanie z różnymi zestawami i stylami walki.
 
