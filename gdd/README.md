@@ -133,12 +133,19 @@ Ekwipunek:
 
 Ma kilka elementow:
 Glowa (hełmy, przepaski itd.) - daja dodatkowy pancerz, mniejsza ilość statysyk
+
 Barki (naramieniki) - daja dodatkowy pancerz, mniejsza ilość statysyk
+
 Klatka piersiowa (pancerz, szaty itd.) daja dodatkowy pancerz, średnia ilość statysyk
+
 lewa ręka, prawa ręka (lewa to broń, prawa to kołczan, tarcze itd.) - Dodatkowe bazowe punkty obrażen jeżeli chodzi o broń, natomiast prawa ręka czyli przedmioty dodatkowe takie jak tarcza, kołczan  itd. dają bonusy + statysyki w przypadku tarczy szansze na całkowite zablokowanie obrażeń, kołczaam więcej strzał.
+
 Pierścionki (tylko 2) - dają tylko statystyki
+
 Pasek - daje tylko statysyki głównie do siły
+
 Spodnie - pancerz, mniejsza ilość statysyk
+
 Buty - pancerz, potencjalne zwiększenie szybkośći (nie ma jeszcze jej w grze).
 
 Plecak:
