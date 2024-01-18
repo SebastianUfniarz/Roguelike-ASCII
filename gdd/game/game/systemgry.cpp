@@ -6,7 +6,7 @@
 SystemGry::SystemGry(string nazwaPlikuPoziomu)
 {
 
-    gracz.inicjalizajca(1,100,15,20,0);
+    gracz.inicjalizajca(1,100,15,20,10,20,0);
     poziom.wczytaj(nazwaPlikuPoziomu, gracz);
     poziom.wyswietl();
 
@@ -31,7 +31,6 @@ void SystemGry::ruchGracza(){
 
     while(true){
         komenda = _getch();
-        cout << "Wprowadziles : " << komenda << endl;
         poziom.rusz(komenda, gracz);
         poziom.aktualizujPotwory(gracz);
 

@@ -52,11 +52,23 @@ void Poziom::wczytaj(string nazwaPliku, Gracz &gracz) {
                     gracz.ustawPozycje(j, i);
                 break;
                 case 'S': // wąż
-                przeciwnicy.push_back(Przeciwnik("Waz", pole, 1, 5, 20, 50));
+                przeciwnicy.push_back(Przeciwnik("Waz", pole, 1, 5, 20, 5, 5, 50));
                 przeciwnicy.back().ustawPozycje(j, i);
                 break;
                 case 'g':
-                przeciwnicy.push_back(Przeciwnik("Goblin", pole, 2, 10, 10, 100));
+                przeciwnicy.push_back(Przeciwnik("Goblin", pole, 10 , 20, 10, 10, 5, 100));
+                przeciwnicy.back().ustawPozycje(j, i);
+                break;
+                case 'o':
+                przeciwnicy.push_back(Przeciwnik("Ork", pole, 30 , 50, 20, 30, 10, 200));
+                przeciwnicy.back().ustawPozycje(j, i);
+                break;
+                case 's':
+                przeciwnicy.push_back(Przeciwnik("Smok", pole, 1000 , 2000, 1000, 100, 100, 10000));
+                przeciwnicy.back().ustawPozycje(j, i);
+                break;
+                case 'd':
+                przeciwnicy.push_back(Przeciwnik("Driada", pole, 15 , 50, 50, 50, 50, 600));
                 przeciwnicy.back().ustawPozycje(j, i);
                 break;
             }
@@ -167,7 +179,7 @@ void Poziom::przetworzRuchPrzeciwnika(Gracz &gracz, int przeciwnikIndex, int mie
         wyswietl();
         case '@':
         atak(gracz, przeciwnikX, przeciwnikY);
-        system("PAUSE");
+
         break;
         case '#':
         break;
@@ -211,7 +223,7 @@ void Poziom::aktualizujPotwory(Gracz &gracz) {
 void Poziom::atak(Gracz &gracz, int celX, int celY){
 
     string nazwaPrzeciwnika;
-    int przeciwnikX, przeciwnikY, ileObrazen, atakRoll, graczX, graczY;
+    int przeciwnikX, przeciwnikY, ileObrazen = 0, atakRoll, graczX, graczY;
 
     gracz.dostanPozycje(graczX,graczY);
 
@@ -222,9 +234,23 @@ void Poziom::atak(Gracz &gracz, int celX, int celY){
 
         if (celX == przeciwnikX && celY == przeciwnikY ){
             // tura gracza
+
             atakRoll = gracz.obrazenia();
-            cout << "Bohater zaatakowal " << nazwaPrzeciwnika <<" zadajac: "<< atakRoll << " obrazen" << "\n";
-            ileObrazen = przeciwnicy[i].dostanObrazenia(atakRoll);
+
+            if(przeciwnicy[i].unik(przeciwnicy[i])) {
+                atakRoll = 0;
+                przeciwnicy[i].dostanObrazenia(atakRoll);
+                cout << "Bohater chybil "<< nazwaPrzeciwnika << " zadajac: " << atakRoll << " obrazen" << "\n";
+            }
+            else if(gracz.ciosKrytyczny(gracz)) {
+                atakRoll *= 2;
+                przeciwnicy[i].dostanObrazenia(atakRoll);
+                cout << "Bohater trafia krytycznie "<< nazwaPrzeciwnika << " zadajac: " << atakRoll << " obrazen" << "\n";
+            }
+            else {
+                cout << "Bohater zaatakowal " << nazwaPrzeciwnika <<" zadajac: "<< atakRoll << " obrazen" << "\n";
+                ileObrazen = przeciwnicy[i].dostanObrazenia(atakRoll);
+            }
 
             if (ileObrazen != 0){
                 ustawPole(celX,celY,'.');
@@ -234,16 +260,29 @@ void Poziom::atak(Gracz &gracz, int celX, int celY){
                 przeciwnicy.pop_back();
                 i--;
 
-
                 system("PAUSE");
                 gracz.dostanDoswiadczenie(ileObrazen);
                 return;
             }
 
+//=======================================================================================================================
+
             // Tura przeciwnika
             atakRoll = przeciwnicy[i].obrazenia();
+            if(gracz.unik(gracz)) {
+                atakRoll = 0;
+                gracz.dostanObrazenia(atakRoll);
+                cout << nazwaPrzeciwnika << " chybil gracza zadajac: " << atakRoll << " obrazen" << "\n";
+            }
+            else if(przeciwnicy[i].ciosKrytyczny(przeciwnicy[i])) {
+                atakRoll *= 2;
+                gracz.dostanObrazenia(atakRoll);
+               cout << nazwaPrzeciwnika << " trafil krytycznie gracza zadajac: " << atakRoll << " obrazen" << "\n";
+            }
+            else {
             cout << nazwaPrzeciwnika << " zaatakowal gracza zadajac: " << atakRoll << " obrazen" << "\n";
             ileObrazen = gracz.dostanObrazenia(atakRoll);
+            }
 
             if (ileObrazen != 0){
                 ustawPole(graczX,graczY,'X');

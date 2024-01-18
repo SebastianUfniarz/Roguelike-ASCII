@@ -9,11 +9,13 @@ Gracz::Gracz(){
     this->y = 0;
 }
 
-void Gracz::inicjalizajca(int poziom, int zycie, int atak, int obrona, int doswiadczenie) {
+void Gracz::inicjalizajca(int poziom, int zycie, int atak, int obrona, int zrecznosc, int doswiadczenie, int szczescie) {
     this->poziom = poziom;
     this->zycie = zycie;
     this->atak = atak;
     this->obrona = obrona;
+    this->zrecznosc = zrecznosc;
+    this->szczescie = szczescie;
     this->doswiadczenie = doswiadczenie;
 }
 
@@ -65,3 +67,36 @@ void Gracz::dostanDoswiadczenie(int doswiadczenie) {
         system("PAUSE");
     }
 };
+
+
+bool Gracz::unik(Gracz &gracz) {
+
+    int maxSzansaUnik = 50;
+    int BazowaSzansaUniku = 2;
+    int SzansaUniku = min(gracz.zrecznosc, maxSzansaUnik);
+
+    if (gracz.zrecznosc > 5) {
+        int dodatkowaSzansa = (gracz.zrecznosc - 5) * BazowaSzansaUniku;
+        SzansaUniku += dodatkowaSzansa;
+    }
+
+    int losowaWartosc = rand() % 100 + 1;
+
+    return losowaWartosc <= SzansaUniku;
+}
+
+bool Gracz::ciosKrytyczny(Gracz &gracz) {
+    int bazowaSzansaKrytka = 10;
+    int bazowaSzansaKrytkaZwiekszenie = 2;
+    int szansaKrytyczna = gracz.szczescie + bazowaSzansaKrytka;
+    if (gracz.szczescie > 5) {
+        int dodatkowaSzansa = gracz.szczescie * bazowaSzansaKrytkaZwiekszenie;
+        szansaKrytyczna += dodatkowaSzansa;
+    }
+    int losowaWartosc = rand() % 100 + 1;
+    return losowaWartosc <= szansaKrytyczna;
+}
+
+void Gracz::wyswietlStatystyki(){
+    cout << "Zycie: "<< this->zycie << "\n";
+}

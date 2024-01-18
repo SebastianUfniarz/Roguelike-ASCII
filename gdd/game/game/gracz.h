@@ -5,7 +5,7 @@ class Gracz {
 public:
 
     Gracz();
-    void inicjalizajca(int poziom, int zycie, int atak, int obrona, int doswiadczenie);
+    void inicjalizajca(int poziom, int zycie, int atak, int obrona,int zrecznosc, int szczescie, int doswiadczenie);
 
     int obrazenia();
 
@@ -17,9 +17,15 @@ public:
 
     int dostanObrazenia(int obrazenia);
 
+    bool unik(Gracz &gracz);
+
+    bool ciosKrytyczny(Gracz &gracz);
+
+    void wyswietlStatystyki();
+
 private:
 
-    int x, y, poziom, zycie, atak, obrona, doswiadczenie;
+    int x, y, poziom, zycie, atak, obrona, zrecznosc, doswiadczenie, szczescie;
 
 
 };

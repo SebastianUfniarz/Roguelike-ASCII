@@ -2,12 +2,14 @@
 #include <random>
 #include <ctime>
 
-Przeciwnik::Przeciwnik(string nazwa, char pole, int atak, int obrona, int zycie, int wartoscDoswiadczenia) {
+Przeciwnik::Przeciwnik(string nazwa, char pole, int atak, int obrona, int zrecznosc, int szczescie, int zycie, int wartoscDoswiadczenia) {
     this->nazwa = nazwa;
     this->pole = pole;
+    this->zycie = zycie;
     this->atak = atak;
     this->obrona = obrona;
-    this->zycie = zycie;
+    this->zrecznosc = zrecznosc;
+    this->szczescie = szczescie;
     this->wartoscDoswiadczenia = wartoscDoswiadczenia;
 }
 
@@ -45,6 +47,35 @@ int Przeciwnik::dostanObrazenia(int obrazenia) {
     }
     return 0;
 }
+
+bool Przeciwnik::unik(Przeciwnik &przeciwnik) {
+
+    int maxSzansaUnik = 50;
+    int BazowaSzansaUniku = 2;
+    int SzansaUniku = min(przeciwnik.zrecznosc, maxSzansaUnik);
+
+    if (przeciwnik.zrecznosc > 5) {
+        int dodatkowaSzansa = (przeciwnik.zrecznosc - 5) * BazowaSzansaUniku;
+        SzansaUniku += dodatkowaSzansa;
+    }
+
+    int losowaWartosc = rand() % 100 + 1;
+
+    return losowaWartosc <= SzansaUniku;
+}
+
+bool Przeciwnik::ciosKrytyczny(Przeciwnik &przeciwnik) {
+    int bazowaSzansaKrytka = 10;
+    int bazowaSzansaKrytkaZwiekszenie = 2;
+    int szansaKrytyczna = przeciwnik.szczescie + bazowaSzansaKrytka;
+    if (przeciwnik.szczescie > 5) {
+        int dodatkowaSzansa = przeciwnik.szczescie * bazowaSzansaKrytkaZwiekszenie;
+        szansaKrytyczna += dodatkowaSzansa;
+    }
+    int losowaWartosc = rand() % 100 + 1;
+    return losowaWartosc <= szansaKrytyczna;
+}
+
 
 char Przeciwnik::dostanRuch(int graczX,int graczY) {
     static default_random_engine generator(time(NULL));

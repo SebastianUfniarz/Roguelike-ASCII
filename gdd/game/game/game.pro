@@ -4,6 +4,7 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
+        ekwipunek.cpp \
         gracz.cpp \
         main.cpp \
         poziom.cpp \
@@ -11,6 +12,7 @@ SOURCES += \
         systemgry.cpp
 
 HEADERS += \
+    ekwipunek.h \
     gracz.h \
     poziom.h \
     przeciwnik.h \

@@ -9,7 +9,7 @@ class Przeciwnik {
 
 public:
 
-    Przeciwnik(string nazwa, char pole, int atak, int obrona, int zycie, int wartoscDoswiadczenia);
+    Przeciwnik(string nazwa, char pole, int atak, int obrona, int zycie, int zrecznosc, int szczescie, int wartoscDoswiadczenia);
 
     void ustawPozycje(int x, int y);
 
@@ -25,9 +25,14 @@ public:
 
     char dostanSymbol(){return pole;};
 
+    bool unik(Przeciwnik &Przeciwnik);
+
+    bool ciosKrytyczny(Przeciwnik &Przeciwnik);
+
+
 private:
     string nazwa;
     char pole;
-    int atak, obrona, zycie, wartoscDoswiadczenia;
+    int atak, obrona, zycie, zrecznosc, szczescie , wartoscDoswiadczenia;
     int x, y;
 };
