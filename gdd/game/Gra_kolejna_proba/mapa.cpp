@@ -63,7 +63,8 @@ void Mapa::dodajPrzeciwnikaLosowo(Przeciwnik przeciwnik, int ilosc) {
 }
 
 void Mapa::wyswietl() {
-    cout<<"Poruszanie sie w/s/a/d Podnies przedmiot: f zniszcz przedmiot z plecaka: u Zaloz przedmiot z plecaka: e Sciagnij: r Walka: q" << endl;
+    cout<<"Poruszanie sie w/s/a/d Podnies przedmiot: f zniszcz przedmiot z plecaka: u" << endl;
+    cout<<"Zaloz przedmiot z plecaka: e Sciagnij: r Test walki: l" << endl;
     for ( auto& row : mapa) {
         for (auto& pole : row) {
             cout << pole.symbol;
@@ -78,10 +79,10 @@ void Mapa::dodajGracza(int x, int y, Gracz &gracz) {
     gracz.x = x;
     gracz.y = y;
     mapa[y][x] = gracz;
-    gracz.inicjalizajca(1,50,10,5,50);
+    gracz.inicjalizajca(1,50,10,5,5,10,50);
 }
 
-void Mapa::dodajPrzedmiot(int x, int y, string nazwa, int atak, int obrona, przedmiotTyp typ) {
+void Mapa::dodajPrzedmiot(int x, int y, string nazwa, float atak,float obrona,float szczescie, float zrecznosc, przedmiotTyp typ) {
     if (!czyPolePuste(x, y)) {
         return;
     }
@@ -92,12 +93,14 @@ void Mapa::dodajPrzedmiot(int x, int y, string nazwa, int atak, int obrona, prze
     nowyPrzedmiot.nazwa = nazwa;
     nowyPrzedmiot.typ = typ;
     nowyPrzedmiot.atak = atak;
+    nowyPrzedmiot.szczescie = szczescie;
+    nowyPrzedmiot.zrecznosc = zrecznosc;
     nowyPrzedmiot.obrona = obrona;
     przedmioty.push_back(nowyPrzedmiot);
     mapa[y][x] = nowyPrzedmiot;
 }
 
-void Mapa::dodajPrzeciwnika(int x, int y, char symbol, string nazwa, int atak, int obrona, int zycie, int wartoscDoswiadczenia) {
+void Mapa::dodajPrzeciwnika(int x, int y, char symbol, string nazwa, int atak, int obrona, int zycie, float zrecznosc, float szczescie, int wartoscDoswiadczenia) {
     if (!czyPolePuste(x, y)) {
         return;
     }
@@ -106,6 +109,8 @@ void Mapa::dodajPrzeciwnika(int x, int y, char symbol, string nazwa, int atak, i
     nowyPrzeciwnik.x = x;
     nowyPrzeciwnik.y = y;
     nowyPrzeciwnik.zycie = zycie;
+    nowyPrzeciwnik.zrecznosc = zrecznosc;
+    nowyPrzeciwnik.szczescie = szczescie;
     nowyPrzeciwnik.nazwa = nazwa;
     nowyPrzeciwnik.atak = atak;
     nowyPrzeciwnik.symbol = symbol;
@@ -153,6 +158,12 @@ void Mapa::przesunGracza(char kierunek, Mapa &mapa, Gracz &gracz) {
         cin>>indeks;
         gracz.plecak.usunPrzedmiot(indeks);
         break;
+        case 'l':
+        cout << "ile : ";
+        int ile;
+        cin>>ile;
+        mapa.testujWalkiWielokrotnie(ile);
+        break;
         default:
             return; // Ignoruj nieznane komendy
     }
@@ -174,7 +185,6 @@ void Mapa::przesunGracza(char kierunek, Mapa &mapa, Gracz &gracz) {
     gracz.plecak.wyswietlZawartosc();
     gracz.plecak.wyswietlZawartoscEkwipunek();
     gracz.wyswietlStatystyki();
-
 }
 
 void Mapa::przesunZAutomatycznymAtakiem(Gracz &gracz, int nowyX, int nowyY) {
@@ -359,18 +369,27 @@ void Mapa::atak(Gracz &gracz) {
 
 void Mapa::atakujPrzeciwnika(Gracz &gracz, int celX, int celY) {
     string nazwaPrzeciwnika;
-    int ileObrazen, atakRoll, zyciePrzedGracz, zyciePrzedPrzeciwnik;
+    int ileObrazen, atakRoll, zyciePrzedGracz , zyciePrzedPrzeciwnik;
 
     // Znajdź przeciwnika na danej pozycji
     for (unsigned int i = 0; i < przeciwnicy.size(); i++) {
         if (przeciwnicy[i].x == celX && przeciwnicy[i].y == celY) {
             nazwaPrzeciwnika = przeciwnicy[i].nazwa;
-
-
+            gracz.wyswietlStatystyki();
+            if(przeciwnicy[i].szansaUniuku(przeciwnicy[i].zrecznosc)){
+                cout << "Bohater chybil " << przeciwnicy[i].nazwa << " nie zadajac obrazen " << "\n";
+            }
+            else if(gracz.szansaKryta(gracz.dostanSzczescie())){
+                atakRoll = gracz.obrazenia();
+                zyciePrzedPrzeciwnik = przeciwnicy[i].zycie;
+                ileObrazen = przeciwnicy[i].dostanObrazenia(atakRoll*2);
+                cout << "Bohater trafil krytycznie " << przeciwnicy[i].nazwa << " zadajac: " << abs(zyciePrzedPrzeciwnik-przeciwnicy[i].zycie) << " obrazen" << "\n";
+            }
+            else {
             atakRoll = gracz.obrazenia();
-            zyciePrzedGracz = gracz.dostanZycie();
+            zyciePrzedPrzeciwnik = przeciwnicy[i].zycie;
             ileObrazen = przeciwnicy[i].dostanObrazenia(atakRoll);
-             cout << gracz.dostanZycie()<< "Bohater zaatakowal " << nazwaPrzeciwnika << " zadajac: " << zyciePrzedGracz - gracz.dostanZycie() << " obrazen" << "\n";
+            cout << "Bohater zaatakowal " << nazwaPrzeciwnika << " zadajac: " << abs(zyciePrzedPrzeciwnik - przeciwnicy[i].zycie) << " obrazen" << "\n";
             if (ileObrazen != 0) {
                 // Zaktualizuj pole na mapie (zmień symbol na kropkę)
                 setPole(celX, celY, '.');
@@ -385,21 +404,31 @@ void Mapa::atakujPrzeciwnika(Gracz &gracz, int celX, int celY) {
                 // Zakończ funkcję, ponieważ tura przeciwnika nie będzie potrzebna
                 return;
             }
-
+            }
             // Tura przeciwnika
             przeciwnicy[i].wyswietlStatystyki();
+            if(gracz.szansaUniuku(gracz.dostanZrecznosc())){
+                cout << przeciwnicy[i].nazwa << " chybil " << "  nie zadajac obrazen " << "\n";
+            }
+            else if(przeciwnicy[i].szansaKryta(przeciwnicy[i].szczescie)){
+                atakRoll = przeciwnicy[i].obrazenia();
+                zyciePrzedPrzeciwnik = przeciwnicy[i].zycie;
+                ileObrazen = gracz.dostanObrazenia(atakRoll*2);
+                cout <<przeciwnicy[i].nazwa << " trafil krytycznie zadajac: " << abs(zyciePrzedPrzeciwnik-przeciwnicy[i].zycie) << " obrazen" << "\n";
+            }
+            else {
             atakRoll = przeciwnicy[i].obrazenia();
-
+            zyciePrzedGracz = gracz.dostanZycie();
             ileObrazen = gracz.dostanObrazenia(atakRoll);
-            cout << nazwaPrzeciwnika << " zaatakowal gracza zadajac: " << atakRoll << " obrazen" << "\n";
+            cout << nazwaPrzeciwnika << " zaatakowal gracza zadajac: " << abs(zyciePrzedGracz - gracz.dostanZycie()) << " obrazen" << "\n";
             if (ileObrazen != 0) {
                 // Zaktualizuj pole na mapie (zmień symbol na X)
                 setPole(gracz.x, gracz.y, 'X');
                 cout << "Bohater zginal" << "\n";
                 system("PAUSE");
-                exit(0);  // Zakładam, że chcesz zakończyć program po śmierci bohatera
+                exit(0);
             }
-
+            }
             return;
         }
     }
@@ -434,4 +463,124 @@ bool Mapa::czyPolePuste(int x, int y) {
 
     return true;
 }
+
+
+void Mapa::testujWalkiWielokrotnie(int iloscTestow) {
+    srand(static_cast<unsigned>(time(nullptr)));
+
+
+        std::cout << "Choose an enemy:" << std::endl;
+        std::cout << "1. Ogr" << std::endl;
+        std::cout << "2. Goblin" << std::endl;
+        std::cout << "3. Szczur" << std::endl;
+        std::cout << "4. Zombi" << std::endl;
+        std::cout << "5. Zywiolak" << std::endl;
+
+        int choice;
+        std::cin >> choice;
+        int ileObrazen, zyciePrzedGracz, zyciePrzedPrzeciwnik;
+        int atakRoll;
+        Przeciwnik* przeciwnik = nullptr;
+        int wygraneBohater = 0;
+        int unikiPrzeciwnik = 0;
+        int wygranePrzeciwnik = 0;
+        int unikiGracz = 0;
+        int krytGracz = 0;
+        int krytPrzeciwnik = 0;
+        // Przygotuj nowego przeciwnika dla każdej walki
+        for (int i = 0; i < iloscTestow; ++i) {
+            // Stwórz nowego gracza
+            Gracz gracz;
+            gracz.inicjalizajca(1, 50, 15, 10, 10, 10, 50);
+
+            switch (choice) {
+                case 1:
+                    przeciwnik = new Ogr();
+                    break;
+                case 2:
+                    przeciwnik = new Goblin();
+                    break;
+                case 3:
+                    przeciwnik = new Szczur();
+                    break;
+                case 4:
+                    przeciwnik = new Zombi();
+                    break;
+                case 5:
+                    przeciwnik = new Zywiolak();
+                    break;
+                default:
+                    std::cout << "Invalid choice. Exiting combat testing mode." << std::endl;
+                    return;
+            }
+
+
+            // Wyświetl początkowy stan walki
+            std::cout << "Walka " << i + 1 << ":\n";
+            std::cout << "Bohater: " << gracz.dostanZycie() << " HP\n";
+            std::cout << "Przeciwnik: " << przeciwnik->zycie << " HP\n\n";
+
+            // Przeprowadź walkę
+            while (gracz.dostanZycie() > 0 && przeciwnik->zycie > 0) {
+                if(przeciwnik->szansaUniuku(przeciwnik->zrecznosc)){
+                    cout << "Bohater chybil " << przeciwnik->nazwa << "  nie zadajac obrazen " << "\n";
+                    ++unikiPrzeciwnik;
+                }
+                else if(gracz.szansaKryta(gracz.dostanSzczescie())){
+                    atakRoll = gracz.obrazenia();
+                    zyciePrzedPrzeciwnik = przeciwnik->zycie;
+                    ileObrazen = przeciwnik->dostanObrazenia(atakRoll*2);
+                    cout << "Bohater trafil krytycznie " << przeciwnik->nazwa << " zadajac: " << abs(zyciePrzedPrzeciwnik-przeciwnik->zycie) << " obrazen" << "\n";
+                    krytGracz++;
+                }
+                else {
+                atakRoll = gracz.obrazenia();
+                zyciePrzedGracz = gracz.dostanZycie();
+                zyciePrzedPrzeciwnik = przeciwnik->zycie;
+                ileObrazen = przeciwnik->dostanObrazenia(atakRoll);
+                cout << "Bohater zaatakowal " << przeciwnik->nazwa << " zadajac: " << abs(zyciePrzedPrzeciwnik-przeciwnik->zycie) << " obrazen" << "\n";
+                }
+                if(gracz.szansaUniuku(gracz.dostanZrecznosc())){
+                cout << przeciwnik->nazwa << " chybil " << "  nie zadajac obrazen " << "\n";
+                    ++unikiGracz;
+                }
+                else if(przeciwnik->szansaKryta(przeciwnik->szczescie)){
+                    atakRoll = przeciwnik->obrazenia();
+                    zyciePrzedPrzeciwnik = przeciwnik->zycie;
+                    ileObrazen = gracz.dostanObrazenia(atakRoll*2);
+                    cout << "Bohater trafil krytycznie " << przeciwnik->nazwa << " zadajac: " << abs(zyciePrzedPrzeciwnik-przeciwnik->zycie) << " obrazen" << "\n";
+                    krytPrzeciwnik++;
+                }
+                else {
+                atakRoll = przeciwnik->obrazenia();
+                ileObrazen = gracz.dostanObrazenia(atakRoll);
+                cout << przeciwnik->nazwa << " zaatakowal gracza zadajac: " << abs(zyciePrzedGracz - gracz.dostanZycie()) << " obrazen" << "\n";
+                }
+                // Wyświetl aktualny stan walki
+                std::cout << "Stan walki:\n";                
+                std::cout << "Bohater: " << gracz.dostanZycie() << " HP\n";
+                std::cout << przeciwnik->nazwa << ": " << przeciwnik->zycie << " HP\n\n";
+
+
+            }
+            // Wyświetl wynik walki
+            if (gracz.dostanZycie() <= 0) {
+                std::cout << "Bohater zginął.\n";
+                ++wygranePrzeciwnik;
+            } else {
+                std::cout << "Bohater pokonał przeciwnika.\n\n";
+                ++wygraneBohater;
+            }
+
+        }
+        cout <<  "Wygrane bohater: " << wygraneBohater << endl;
+        cout <<  "Uniki "<< "Bohater" << ": " << unikiGracz << endl;
+        cout <<  "Trafienia krytyczne "<< "Bohater" << ": " << krytGracz << endl;
+        cout <<  "Wygrane "<< przeciwnik->nazwa<< ": " << wygranePrzeciwnik << endl;
+        cout <<  "Uniki "<< przeciwnik->nazwa<< ": " << unikiPrzeciwnik << endl;
+        cout <<  "Trafienia krytyczne "<< przeciwnik->nazwa << " : " << krytPrzeciwnik << endl<<endl;
+        // Zwolnij pamięć zaalokowaną na obiekt przeciwnika
+        delete przeciwnik;
+    }
+
 

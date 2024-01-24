@@ -6,7 +6,9 @@ enum przedmiotTyp {
     HELM,
     PANCERZ,
     SPODNIE,
-    // Dodaj inne miejsca według potrzeb
+    MIECZ,
+    PIERSCIEN,
+    PAS
 };
 
 using namespace std;
@@ -16,7 +18,7 @@ public:
     przedmiot();
     string nazwa;
     przedmiotTyp typ;
-    int atak, obrona;
+    float atak, obrona, szczescie, zrecznosc;
 };
 
 

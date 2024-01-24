@@ -20,6 +20,34 @@ void Przeciwnik::wyswietlStatystyki(){
     cout << "Doswiadczenie: " << wartoscDoswiadczenia << endl;
 }
 
+bool Przeciwnik::szansaUniuku(float zrecznosc) {
+
+    int szansa = zrecznosc;
+
+    if (szansa >= 100) {
+        return true;
+    }
+    szansa = floor(szansa);
+    int randomValue = rand() % 100;
+
+    return randomValue < szansa;
+
+};
+
+
+bool Przeciwnik::szansaKryta(float szczescie) {
+    int szansa = szczescie;
+
+    if (szansa >= 100) {
+        return true;
+    }
+    szansa = floor(szansa);
+    int randomValue = rand() % 100;
+
+    return randomValue < szansa;
+}
+
+
 int Przeciwnik::dostanObrazenia(float obrazenia) {
     float obrazenia_red;
     obrazenia_red = obrazenia * (obrazenia / (obrazenia + this->obrona));

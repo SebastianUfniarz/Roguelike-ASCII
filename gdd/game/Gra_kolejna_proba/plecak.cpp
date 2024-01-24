@@ -52,6 +52,8 @@ void Plecak::zalozPrzedmiotZPlecaka(unsigned int indeks, Gracz &gracz) {
                 ekwipunek.push_back(zawartosc[indeks]);
                 gracz.zwiekszenieAtaku(ekwipunek.back().atak);
                 gracz.zwiekszenieObrony(ekwipunek.back().obrona);
+                gracz.zwiekszenieSzczescie(ekwipunek.back().szczescie);
+                gracz.zwiekszenieZrecznosc(ekwipunek.back().zrecznosc);
                 usunPrzedmiot(indeks);
 
 
@@ -97,7 +99,8 @@ void Plecak::sciagnijPrzedmiotZEkwipunku(unsigned int indeks, Gracz &gracz) {
             if (tempEkwipunek.size() == 1) {
                 gracz.zmniejszenieAtaku(tempEkwipunek[0].atak);
                 gracz.zmniejszenieObrony(tempEkwipunek[0].obrona);
-
+                gracz.zmniejszenieSzczescie(tempEkwipunek[0].szczescie);
+                gracz.zmniejszenieZrecznosc(tempEkwipunek[0].zrecznosc);
                 // Dodaj przedmiot do plecaka gracza
                 zawartosc.push_back(tempEkwipunek[0]);
 

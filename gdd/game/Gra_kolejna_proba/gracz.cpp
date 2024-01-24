@@ -8,14 +8,18 @@ Gracz::Gracz()
     symbol = '@';
 }
 
-void Gracz::inicjalizajca(int poziom, int zycie, float atak, float obrona, int doswiadczenie) {
+void Gracz::inicjalizajca(int poziom, int zycie, float atak, float obrona, float zrecznosc,float szczescie, int doswiadczenie) {
     this->poziom = poziom;
     this->zycie = zycie;
     this->atak = atak;
+    this->zrecznosc = zrecznosc;
     this->obrona = obrona;
+    this->szczescie = szczescie;
     this->doswiadczenie = doswiadczenie;
     bonusAtak = 0;
     bonusObrona = 0;
+    bonusZrecznosc = 0;
+    bonusSzczescie = 0;
 }
 
 
@@ -24,10 +28,19 @@ void Gracz::zwiekszenieAtaku(int bonusowyAtak) {
     this->atak+=bonusowyAtak;
 
 };
-
 void Gracz::zwiekszenieObrony(int bonusowaObrona) {
 
     this->obrona+=bonusowaObrona;
+
+};
+void Gracz::zwiekszenieZrecznosc(int bonusZrecznosc) {
+
+    this->zrecznosc+=bonusZrecznosc;
+
+};
+void Gracz::zwiekszenieSzczescie(int bonusSzczescie) {
+
+    this->szczescie+=bonusSzczescie;
 
 };
 void Gracz::zmniejszenieAtaku(int bonusowyAtak) {
@@ -35,23 +48,56 @@ void Gracz::zmniejszenieAtaku(int bonusowyAtak) {
     this->atak-=bonusowyAtak;
 
 };
+void Gracz::zmniejszenieZrecznosc(int bonusZrecznosc) {
 
+    this->zrecznosc-=bonusZrecznosc;
+
+};
+void Gracz::zmniejszenieSzczescie(int bonusSzczescie) {
+
+    this->szczescie-=bonusSzczescie;
+
+};
 void Gracz::zmniejszenieObrony(int bonusowaObrona) {
 
     this->obrona-=bonusowaObrona;
 
 };
+
 float Gracz::obrazenia() {
 
     return this->atak;
 };
 
+bool Gracz::szansaUniuku(float zrecznosc) {
+    int szansa = zrecznosc;
+
+    if (szansa >= 100) {
+        return true;
+    }
+    szansa = floor(szansa);
+    int randomValue = rand() % 100;
+
+    return randomValue < szansa;
+};
+
+bool Gracz::szansaKryta(float szczescie) {
+    int szansa = szczescie;
+
+    if (szansa >= 100) {
+        return true;
+    }
+    szansa = floor(szansa);
+    int randomValue = rand() % 100;
+
+    return randomValue < szansa;
+}
+
 int Gracz::dostanObrazenia(float obrazenia) {
 
     float obrazenia_red;
     obrazenia_red = obrazenia * (obrazenia / (obrazenia + this->obrona));
-    obrazenia = floor(obrazenia_red);
-    cout<<"Obrazenia: " << obrazenia_red << " " << obrazenia << " " << this->atak <<" " << this->obrona;
+    obrazenia = floor(obrazenia_red);   
     if(obrazenia > 0 ) {
         this->zycie-=obrazenia;
 
@@ -85,5 +131,7 @@ void Gracz::wyswietlStatystyki()  {
     cout << "Zycie: " << zycie << endl;
     cout << "Atak: " << atak << endl;
     cout << "Obrona: " << obrona << endl;
+    cout << "Zrecznosc: " << zrecznosc << endl;
+    cout << "Szczescie: " << szczescie << endl;
     cout << "Doswiadczenie: " << doswiadczenie << endl;
 }

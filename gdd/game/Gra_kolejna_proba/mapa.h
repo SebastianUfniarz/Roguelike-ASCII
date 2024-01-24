@@ -22,8 +22,8 @@ public:
     void stworzMape(int szerokosc, int wysokosc);
     void wyswietl();
     void dodajGracza(int x, int y, Gracz &gracz);
-    void dodajPrzedmiot(int x, int y, string nazwa, int atak, int obrona, przedmiotTyp typ);
-    void dodajPrzeciwnika(int x, int y, char pole, string nazwa, int atak, int obrona, int zycie, int wartoscDoswiadczenia);
+    void dodajPrzedmiot(int x, int y, string nazwa, float atak,float obrona,float szczescie, float zrecznosc, przedmiotTyp typ);
+    void dodajPrzeciwnika(int x, int y, char pole, string nazwa, int atak, int obrona, int zycie, float zrecznosc, float szczescie, int wartoscDoswiadczenia);
     void dodajPrzeciwnika();
     void przesunGracza(char kierunek, Mapa &mapa, Gracz &gracz);
     void czyscMape();
@@ -40,6 +40,7 @@ public:
     void przetworzRuchPrzeciwnika(Gracz &gracz, int przeciwnikIndex, int miejsceX, int miejsceY, Mapa &mapa);
     void przesunZAutomatycznymAtakiem(Gracz &gracz, int nowyX, int nowyY);
     void dodajPrzeciwnikaLosowo(Przeciwnik przeciwnik, int ilosc);
+    void testujWalkiWielokrotnie(int iloscTestow);
     vector<przedmiot> przedmioty;
     vector<Przeciwnik> przeciwnicy;
     vector<vector<Pole>> mapa;

@@ -2,10 +2,12 @@
 
 Zywiolak::Zywiolak()
 {
-    nazwa = "Zywiolak L";
+    nazwa = "Lodowy Zywiolak";
     symbol = 'L';
     atak = 50;
-    obrona = 1;
+    obrona = 10;
+    zrecznosc = 15;
+    szczescie = 15;
     zycie = 200;
     wartoscDoswiadczenia = 500;
 }

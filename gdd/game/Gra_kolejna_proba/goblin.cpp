@@ -4,8 +4,10 @@ Goblin::Goblin()
 {
     nazwa = "Goblin";
     symbol = 'G';
-    atak = 10;
-    obrona = 1;
+    atak = 11;
+    obrona = 5;
+    zrecznosc = 10;
+    szczescie = 5;
     zycie = 50;
     wartoscDoswiadczenia = 50;
 }

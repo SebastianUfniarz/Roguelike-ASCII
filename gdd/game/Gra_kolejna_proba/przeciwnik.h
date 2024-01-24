@@ -20,10 +20,11 @@ public:
 
     int x, y;
     void wyswietlStatystyki();
-
+    bool szansaUniuku(float zrecznosc);
     string nazwa;
     int zycie, wartoscDoswiadczenia;
-    float atak, obrona;
+    bool szansaKryta(float szczescie);
+    float atak, obrona, zrecznosc, szczescie;
     char dostanRuch(Gracz &gracz);
     vector<Przeciwnik> potwory;
 };

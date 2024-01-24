@@ -8,14 +8,14 @@ SystemGry::SystemGry()
 }
 void SystemGry::ini(){
     mapa.dodajGracza(5,5, gracz);
-    mapa.dodajPrzedmiot(9,6, "helm",10,15, HELM);
-    mapa.dodajPrzedmiot(10,6, "pancerz boloni",20,30, PANCERZ);
-    mapa.dodajPrzedmiot(12,6, "hel",5,5, HELM);
-    mapa.dodajPrzedmiot(13,6, "heasd",5,5, HELM);
-    mapa.dodajPrzedmiot(14,6, "hsd",5,5, HELM);
-    mapa.dodajPrzedmiot(15,6, "sdm",5,5, HELM);
-    mapa.dodajPrzedmiot(16,6, "hsdm",5,5, HELM);
-    mapa.dodajPrzeciwnika(4,4,'G',"goblin",10,5,100,100);
+    mapa.dodajPrzedmiot(9,6, "Helm nowicujsza",0,3,0,0, HELM);
+    mapa.dodajPrzedmiot(10,6, "Pancerz nowicujsza",0,7,0,0, PANCERZ);
+    mapa.dodajPrzedmiot(12,6, "Drewniany miecz",5,0,0,0, MIECZ);
+    mapa.dodajPrzedmiot(13,6, "Pas zrecznosci",0,1,0,5, PAS);
+    mapa.dodajPrzedmiot(14,6, "Pierscien szczescia",0,0,3,0, PIERSCIEN);
+    mapa.dodajPrzedmiot(15,6, "Spodnie nowicujsza",0,4,0,1, SPODNIE);
+    mapa.dodajPrzedmiot(16,6, "Pierscien zrecznosci",0,0,0,3, PIERSCIEN);
+    mapa.dodajPrzeciwnika(4,4,'G',"goblin",10,5,50,15,10,100);
 
 };
 void SystemGry::zacznijGre(){
