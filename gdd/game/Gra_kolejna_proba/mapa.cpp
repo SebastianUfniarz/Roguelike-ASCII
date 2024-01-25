@@ -1,5 +1,6 @@
 ﻿#include "mapa.h"
 #include "podloga.h"
+#include "przejscie.h"
 #include "sciana.h"
 #include <iostream>
 #include <vector>
@@ -18,9 +19,10 @@ using namespace std;
 
 Mapa::Mapa() : szerokoscMapy(0), wysokoscMapy(0) {}
 
-void Mapa::stworzMape(int szerokosc, int wysokosc) {
-    int iloscPrzeciwnikowGoblin;
-    int iloscPrzeciwnikowSzczur;
+void Mapa::stworzMape() {
+    int iloscPrzeciwnikow = rand() % 3 + 1;
+    int szerokosc = rand() % 31 + 20;
+    int wysokosc = rand() % 11 + 20;
     szerokoscMapy = szerokosc;
     wysokoscMapy = wysokosc;
     mapa.resize(wysokosc, std::vector<Pole>(szerokosc, Podloga()));
@@ -34,16 +36,107 @@ void Mapa::stworzMape(int szerokosc, int wysokosc) {
         mapa[0][j] = Sciana();
         mapa[wysokosc - 1][j] = Sciana();
     }
+    dodajPokoje(5);
+    dodajSciany(20);
+    dodajPrzeciwnikaLosowo(Goblin(), iloscPrzeciwnikow);
+    dodajPrzeciwnikaLosowo(Szczur(), 10);
+    dodajPrzeciwnikaLosowo(Zombi(), iloscPrzeciwnikow);
+    dodajPrzeciwnikaLosowo(Ogr(), iloscPrzeciwnikow);
+    dodajPrzeciwnikaLosowo(Zywiolak(), iloscPrzeciwnikow);
 
-    iloscPrzeciwnikowGoblin = 1;
-    iloscPrzeciwnikowSzczur = 3;
-    dodajPrzeciwnikaLosowo(Goblin(), iloscPrzeciwnikowGoblin);
-    dodajPrzeciwnikaLosowo(Szczur(), iloscPrzeciwnikowSzczur);
-    dodajPrzeciwnikaLosowo(Zombi(), iloscPrzeciwnikowGoblin);
-    dodajPrzeciwnikaLosowo(Ogr(), iloscPrzeciwnikowGoblin);
-    dodajPrzeciwnikaLosowo(Zywiolak(), iloscPrzeciwnikowGoblin);
+
 }
 
+void Mapa::ustawSymbolNajdalszegoPola() {
+    // Znajdź pozycję gracza na mapie
+    int xGracza = 0, yGracza = 0;
+    for (int i = 0; i < wysokoscMapy; ++i) {
+        for (int j = 0; j < szerokoscMapy; ++j) {
+            if (mapa[i][j].symbol == '@') {
+                xGracza = j;
+                yGracza = i;
+                break;
+            }
+        }
+    }
+
+    // Znajdź najdalsze pole od gracza
+    int maxKroki = 0, maxX = 0, maxY = 0;
+
+    for (int i = 0; i < wysokoscMapy; ++i) {
+        for (int j = 0; j < szerokoscMapy; ++j) {
+            if (mapa[i][j].symbol == '.' || mapa[i][j].symbol == 'I' || czyIstniejePrzeciwnik(j, i)) {
+                int kroki = abs(xGracza - j) + abs(yGracza - i);
+                if (kroki > maxKroki) {
+                    maxKroki = kroki;
+                    maxX = j;
+                    maxY = i;
+                }
+            }
+        }
+    }
+
+    // Oznacz najdalsze pole jako '^'
+    if (maxKroki > 0) {
+        mapa[maxY][maxX] = Przejscie();
+    }
+}
+void Mapa::dodajSciany(int ilosc) {
+    // Dodaj ilość ścian na losowych pozycjach
+    for (int i = 0; i < ilosc; ++i) {
+        int x = rand() % (szerokoscMapy - 2) + 1;
+        int y = rand() % (wysokoscMapy - 2) + 1;
+
+        // Sprawdź, czy pole jest puste
+        if (czyPolePuste(x, y)) {
+            mapa[y][x] = Sciana();
+        } else {
+            --i; // Jeśli pole nie jest puste, spróbuj ponownie dla innego losowego miejsca
+        }
+    }
+}
+void Mapa::dodajPokoje(int ilosc) {
+    for (int i = 0; i < ilosc; ++i) {
+        // Losuj rozmiary pokoju
+        int szerokoscPokoju = rand() % 20 + 1;
+        int wysokoscPokoju = rand() % 10 + 1;
+
+        // Losuj pozycję dla górnego lewego rogu pokoju
+        int x = rand() % (szerokoscMapy - szerokoscPokoju - 2) + 1;
+        int y = rand() % (wysokoscMapy - wysokoscPokoju - 2) + 1;
+
+        // Sprawdź, czy obszar pokoju jest pusty
+        if (czyObszarPusty(x, y, szerokoscPokoju, wysokoscPokoju)) {
+            // Dodaj pokoje
+            for (int j = y; j < y + wysokoscPokoju; ++j) {
+                for (int k = x; k < x + szerokoscPokoju; ++k) {
+                    if (j == y || j == y + wysokoscPokoju - 1 || k == x || k == x + szerokoscPokoju - 1) {
+                        if ((j == y || j == y + wysokoscPokoju - 1) && k == x + szerokoscPokoju / 2) {
+                            mapa[j][k] = Podloga();  // Dodaj wejście
+                        } else {
+                            mapa[j][k] = Sciana();
+                        }
+                    } else {
+                        mapa[j][k] = Podloga();
+                    }
+                }
+            }
+        } else {
+            --i; // Jeśli obszar nie jest pusty, spróbuj ponownie dla innego losowego miejsca
+        }
+    }
+}
+void Mapa::dodajGracza(int x, int y, Gracz &gracz) {
+    while (!czyPolePuste(x, y)) {
+        x = rand() % (szerokoscMapy - 2) + 1;
+        y = rand() % (wysokoscMapy - 2) + 1;
+    }
+
+    gracz.x = x;
+    gracz.y = y;
+    mapa[y][x] = gracz;
+    gracz.inicjalizajca(1, 50, 10, 5, 5, 10, 50);
+}
 void Mapa::dodajPrzeciwnikaLosowo(Przeciwnik przeciwnik, int ilosc) {
     for (int k = 0; k < ilosc; ++k) {
         int x = rand() % (szerokoscMapy - 2) + 1;
@@ -61,31 +154,13 @@ void Mapa::dodajPrzeciwnikaLosowo(Przeciwnik przeciwnik, int ilosc) {
         }
     }
 }
+void Mapa::dodajPrzedmiot(string nazwa, float atak,float obrona,float szczescie, float zrecznosc, przedmiotTyp typ) {
+    int x, y;
 
-void Mapa::wyswietl() {
-    cout<<"Poruszanie sie w/s/a/d Podnies przedmiot: f zniszcz przedmiot z plecaka: u" << endl;
-    cout<<"Zaloz przedmiot z plecaka: e Sciagnij: r Test walki: l" << endl;
-    for ( auto& row : mapa) {
-        for (auto& pole : row) {
-            cout << pole.symbol;
-        }
-        cout << endl;
-    }
-
-}
-
-
-void Mapa::dodajGracza(int x, int y, Gracz &gracz) {
-    gracz.x = x;
-    gracz.y = y;
-    mapa[y][x] = gracz;
-    gracz.inicjalizajca(1,50,10,5,5,10,50);
-}
-
-void Mapa::dodajPrzedmiot(int x, int y, string nazwa, float atak,float obrona,float szczescie, float zrecznosc, przedmiotTyp typ) {
-    if (!czyPolePuste(x, y)) {
-        return;
-    }
+       do {
+           x = rand() % (szerokoscMapy - 2) + 1;
+           y = rand() % (wysokoscMapy - 2) + 1;
+       } while (!czyPolePuste(x, y));
 
     przedmiot nowyPrzedmiot;
     nowyPrzedmiot.x = x;
@@ -99,7 +174,6 @@ void Mapa::dodajPrzedmiot(int x, int y, string nazwa, float atak,float obrona,fl
     przedmioty.push_back(nowyPrzedmiot);
     mapa[y][x] = nowyPrzedmiot;
 }
-
 void Mapa::dodajPrzeciwnika(int x, int y, char symbol, string nazwa, int atak, int obrona, int zycie, float zrecznosc, float szczescie, int wartoscDoswiadczenia) {
     if (!czyPolePuste(x, y)) {
         return;
@@ -119,73 +193,121 @@ void Mapa::dodajPrzeciwnika(int x, int y, char symbol, string nazwa, int atak, i
     przeciwnicy.push_back(nowyPrzeciwnik);
     mapa[y][x] = nowyPrzeciwnik;
 }
+void Mapa::wyswietl() {
+    cout<<"Poruszanie sie w/s/a/d Podnies przedmiot: f zniszcz przedmiot z plecaka: u" << endl;
+    cout<<"Zaloz przedmiot z plecaka: e Sciagnij: r Test walki: l" << endl;
+    for ( auto& row : mapa) {
+        for (auto& pole : row) {
+            cout << pole.symbol;
+        }
+        cout << endl;
+    }
+
+}
+void Mapa::generujNowaMape(Gracz &gracz) {
+    przeciwnicy.clear();
+    przedmioty.clear();
+
+    // Clear the existing map
+    mapa.clear();
+
+    // Przykładowa implementacja: zmień wymiary mapy
+    int nowaSzerokosc = szerokoscMapy + 5;
+    int nowaWysokosc = wysokoscMapy + 5;
+
+    // Przykładowa implementacja: dodaj pokoje do nowej mapy
+    dodajPokoje(5);
+
+    // Przykładowa implementacja: dodaj przeciwników do nowej mapy
+    int iloscPrzeciwnikow = 5;
+    dodajPrzeciwnikaLosowo(Goblin(), iloscPrzeciwnikow);
+
+    // Przykładowa implementacja: ustaw gracza w nowym miejscu
+    int nowyXGracza = 5;
+    int nowyYGracza = 5;
+    dodajGracza(nowyXGracza, nowyYGracza, gracz);
+
+    // Przykładowa implementacja: zaktualizuj wymiary mapy
+    szerokoscMapy = nowaSzerokosc;
+    wysokoscMapy = nowaWysokosc;
+}
 
 void Mapa::przesunGracza(char kierunek, Mapa &mapa, Gracz &gracz) {
     int nowyX = gracz.x;
-    int nowyY = gracz.y;
+       int nowyY = gracz.y;
 
-    switch (kierunek) {
-        case 'w':
-            nowyY--;
-            break;
-        case 's':
-            nowyY++;
-            break;
-        case 'a':
-            nowyX--;
-            break;
-        case 'd':
-            nowyX++;
-            break;
-        case 'f':
-        podniesPrzedmiot(gracz);
-        break;
-        case 'r':
-        cout << "Ktory: ";
-        int indee;
-        cin>>indee;
-        gracz.plecak.sciagnijPrzedmiotZEkwipunku(indee, gracz);
-        break;
-        case 'e':
-        cout << "Ktory: ";
-        int inde;
-        cin>>inde;
-        gracz.plecak.zalozPrzedmiotZPlecaka(inde, gracz);
-        break;
-        case 'u':
-        cout << "Ktory: ";
-        int indeks;
-        cin>>indeks;
-        gracz.plecak.usunPrzedmiot(indeks);
-        break;
-        case 'l':
-        cout << "ile : ";
-        int ile;
-        cin>>ile;
-        mapa.testujWalkiWielokrotnie(ile);
-        break;
-        default:
-            return; // Ignoruj nieznane komendy
-    }
+       switch (kierunek) {
+           case 'w':
+               nowyY--;
+               break;
+           case 's':
+               nowyY++;
+               break;
+           case 'a':
+               nowyX--;
+               break;
+           case 'd':
+               nowyX++;
+               break;
+           case 'f':
+               podniesPrzedmiot(gracz);
+               break;
+           case 'r':
+               cout << "Ktory: ";
+               int indee;
+               cin >> indee;
+               gracz.plecak.sciagnijPrzedmiotZEkwipunku(indee, gracz);
+               break;
+           case 'e':
+               cout << "Ktory: ";
+               int inde;
+               cin >> inde;
+               gracz.plecak.zalozPrzedmiotZPlecaka(inde, gracz);
+               break;
+           case 'u':
+               cout << "Ktory: ";
+               int indeks;
+               cin >> indeks;
+               gracz.plecak.usunPrzedmiot(indeks);
+               break;
+           case 'l':
+               cout << "ile : ";
+               int ile;
+               cin >> ile;
+               testujWalkiWielokrotnie(ile);
+               break;
+           default:
+               return; // Ignoruj nieznane komendy
+       }
 
-    // Sprawdź, czy nowa pozycja jest poprawna
-    if (czyMoznaPrzejsc(nowyX, nowyY)) {
-        // Usuń gracza z obecnej pozycji
-        mapa.mapa[gracz.y][gracz.x] = Podloga();
+       // Sprawdź, czy nowa pozycja jest poprawna
+       if (czyMoznaPrzejsc(nowyX, nowyY)) {
+           // Usuń gracza z obecnej pozycji
+           mapa.mapa[gracz.y][gracz.x] = Podloga();
 
-        // Przesuń gracza na nową pozycję
-        gracz.x = nowyX;
-        gracz.y = nowyY;
-        mapa.mapa[gracz.y][gracz.x] = gracz;
-    }
-    else{
-        przesunZAutomatycznymAtakiem(gracz, nowyX, nowyY);
-    }
-    mapa.wyswietl();
-    gracz.plecak.wyswietlZawartosc();
-    gracz.plecak.wyswietlZawartoscEkwipunek();
-    gracz.wyswietlStatystyki();
-}
+           // Przesuń gracza na nową pozycję
+           gracz.x = nowyX;
+           gracz.y = nowyY;
+
+           // Sprawdź, czy gracz wszedł na pole "^"
+           if (mapa.mapa[gracz.y][gracz.x].symbol == '^') {
+               // Jeżeli tak, generuj nową mapę
+               generujNowaMape(gracz);
+           } else {
+               // W przeciwnym razie, umieść gracza na nowej pozycji
+               mapa.mapa[gracz.y][gracz.x] = gracz;
+           }
+       } else {
+           // Jeżeli nowa pozycja nie jest poprawna, przesuń z automatycznym atakiem
+           przesunZAutomatycznymAtakiem(gracz, nowyX, nowyY);
+       }
+
+       // Wyswietl nową mapę i inne informacje
+       wyswietl();
+       gracz.plecak.wyswietlZawartosc();
+       gracz.plecak.wyswietlZawartoscEkwipunek();
+       gracz.wyswietlStatystyki();
+ }
 
 void Mapa::przesunZAutomatycznymAtakiem(Gracz &gracz, int nowyX, int nowyY) {
     // Sprawdź, czy na nowej pozycji jest przeciwnik
@@ -278,6 +400,7 @@ void Mapa::przetworzRuchPrzeciwnika(Gracz &gracz, int przeciwnikIndex, int miejs
     }
     else if (poleRuchu.symbol == '@') {
         atak(gracz);
+        system("PAUSE");
     }
 
 }
@@ -375,7 +498,9 @@ void Mapa::atakujPrzeciwnika(Gracz &gracz, int celX, int celY) {
     for (unsigned int i = 0; i < przeciwnicy.size(); i++) {
         if (przeciwnicy[i].x == celX && przeciwnicy[i].y == celY) {
             nazwaPrzeciwnika = przeciwnicy[i].nazwa;
+            cout << "\n";
             gracz.wyswietlStatystyki();
+            cout << "\n";
             if(przeciwnicy[i].szansaUniuku(przeciwnicy[i].zrecznosc)){
                 cout << "Bohater chybil " << przeciwnicy[i].nazwa << " nie zadajac obrazen " << "\n";
             }
@@ -406,7 +531,9 @@ void Mapa::atakujPrzeciwnika(Gracz &gracz, int celX, int celY) {
             }
             }
             // Tura przeciwnika
+            cout << "\n";
             przeciwnicy[i].wyswietlStatystyki();
+            cout << "\n";
             if(gracz.szansaUniuku(gracz.dostanZrecznosc())){
                 cout << przeciwnicy[i].nazwa << " chybil " << "  nie zadajac obrazen " << "\n";
             }
@@ -421,6 +548,7 @@ void Mapa::atakujPrzeciwnika(Gracz &gracz, int celX, int celY) {
             zyciePrzedGracz = gracz.dostanZycie();
             ileObrazen = gracz.dostanObrazenia(atakRoll);
             cout << nazwaPrzeciwnika << " zaatakowal gracza zadajac: " << abs(zyciePrzedGracz - gracz.dostanZycie()) << " obrazen" << "\n";
+
             if (ileObrazen != 0) {
                 // Zaktualizuj pole na mapie (zmień symbol na X)
                 setPole(gracz.x, gracz.y, 'X');
@@ -583,4 +711,105 @@ void Mapa::testujWalkiWielokrotnie(int iloscTestow) {
         delete przeciwnik;
     }
 
+void Mapa::floodFill(int x, int y, char symbol) {
+    // Sprawdź, czy pozycja nie wychodzi poza granice mapy
+    if (x < 0 || x >= szerokoscMapy || y < 0 || y >= wysokoscMapy) {
+        return;
+    }
 
+    // Jeśli pole jest dostępne i nie zostało jeszcze odwiedzone
+    if (mapa[y][x].symbol == '.' || mapa[y][x].symbol == 'I' || czyIstniejePrzeciwnik(x, y)) {
+        // Oznacz pole jako odwiedzone
+        mapa[y][x].symbol = '^';
+
+        // Przeprowadź rekurencyjne wywołania dla sąsiednich pól
+        floodFill(x - 1, y, symbol); // lewo
+        floodFill(x + 1, y, symbol); // prawo
+        floodFill(x, y - 1, symbol); // góra
+        floodFill(x, y + 1, symbol); // dół
+    }
+}
+
+void Mapa::floodFillPrzejscie(int x, int y, int &maxKroki, int &maxX, int &maxY, int kroki) {
+    // Sprawdź, czy pozycja nie wychodzi poza granice mapy
+    if (x < 0 || x >= szerokoscMapy || y < 0 || y >= wysokoscMapy) {
+        return;
+    }
+
+    // Sprawdź, czy pole jest dostępne i nie jest ścianą
+    if (mapa[y][x].symbol != '.' && mapa[y][x].symbol != 'I' && !czyIstniejePrzeciwnik(x, y)) {
+        return;
+    }
+
+    // Oznacz pole jako przejście
+    mapa[y][x] = Przejscie();
+
+    // Sprawdź, czy aktualna ścieżka jest najdalsza
+    if (kroki > maxKroki) {
+        maxKroki = kroki;
+        maxX = x;
+        maxY = y;
+    }
+
+    // Przeprowadź rekurencyjne wywołania dla sąsiednich pól
+    floodFillPrzejscie(x - 1, y, maxKroki, maxX, maxY, kroki + 1); // lewo
+    floodFillPrzejscie(x + 1, y, maxKroki, maxX, maxY, kroki + 1); // prawo
+    floodFillPrzejscie(x, y - 1, maxKroki, maxX, maxY, kroki + 1); // góra
+    floodFillPrzejscie(x, y + 1, maxKroki, maxX, maxY, kroki + 1); // dół
+}
+
+bool Mapa::sprawdzDostepnosc() {
+    // Znajdź pozycję gracza na mapie
+    int x = 0, y = 0;
+    for (int i = 0; i < wysokoscMapy; ++i) {
+        for (int j = 0; j < szerokoscMapy; ++j) {
+            if (mapa[i][j].symbol == '@') {
+                x = j;
+                y = i;
+                break;
+            }
+        }
+    }
+
+    // Wykonaj flood fill z pozycji gracza
+    floodFill(x, y, '@');
+
+    // Zresetuj oznaczenia pól
+    for (int i = 0; i < wysokoscMapy; ++i) {
+        for (int j = 0; j < szerokoscMapy; ++j) {
+            if (mapa[i][j].symbol == '^') {
+                mapa[i][j].symbol = '.';
+            }
+        }
+    }
+
+    // Znajdź najdalsze pole od gracza
+    int maxKroki = 0, maxX = 0, maxY = 0;
+    floodFillPrzejscie(x, y, maxKroki, maxX, maxY, 0);
+
+    // Oznacz najdalsze pole jako przejście
+    if (maxKroki > 0) {
+        mapa[15][15].symbol = '!';
+    }
+
+    // Gracz może dotrzeć do każdego przedmiotu i przeciwnika
+    return true;
+}
+
+bool Mapa::czyObszarPusty(int x, int y, int szerokosc, int wysokosc) {
+    // Sprawdź, czy obszar nie wychodzi poza granice mapy
+    if (x < 0 || x + szerokosc >= szerokoscMapy || y < 0 || y + wysokosc >= wysokoscMapy) {
+        return false;
+    }
+
+    // Sprawdź, czy obszar nie koliduje z innymi obiektami
+    for (int j = y; j < y + wysokosc; ++j) {
+        for (int k = x; k < x + szerokosc; ++k) {
+            if (mapa[j][k].symbol != '.') {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}

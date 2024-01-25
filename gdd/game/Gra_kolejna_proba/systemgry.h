@@ -15,5 +15,5 @@ public:
     Gracz gracz;
     Mapa mapa;
     Plecak plecak;
-    void ini();
+    void ini(Mapa &mapa);
 };

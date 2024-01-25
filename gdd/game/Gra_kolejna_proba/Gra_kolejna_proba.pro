@@ -14,6 +14,7 @@ SOURCES += \
         pole.cpp \
         przeciwnik.cpp \
         przedmiot.cpp \
+        przejscie.cpp \
         sciana.cpp \
         systemgry.cpp \
         szczur.cpp \
@@ -30,6 +31,7 @@ HEADERS += \
     pole.h \
     przeciwnik.h \
     przedmiot.h \
+    przejscie.h \
     sciana.h \
     systemgry.h \
     szczur.h \

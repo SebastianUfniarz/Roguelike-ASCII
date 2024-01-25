@@ -19,10 +19,10 @@ public:
 
     int szerokoscMapy;
     int wysokoscMapy;
-    void stworzMape(int szerokosc, int wysokosc);
+    void stworzMape();
     void wyswietl();
     void dodajGracza(int x, int y, Gracz &gracz);
-    void dodajPrzedmiot(int x, int y, string nazwa, float atak,float obrona,float szczescie, float zrecznosc, przedmiotTyp typ);
+    void dodajPrzedmiot(string nazwa, float atak,float obrona,float szczescie, float zrecznosc, przedmiotTyp typ);
     void dodajPrzeciwnika(int x, int y, char pole, string nazwa, int atak, int obrona, int zycie, float zrecznosc, float szczescie, int wartoscDoswiadczenia);
     void dodajPrzeciwnika();
     void przesunGracza(char kierunek, Mapa &mapa, Gracz &gracz);
@@ -44,10 +44,19 @@ public:
     vector<przedmiot> przedmioty;
     vector<Przeciwnik> przeciwnicy;
     vector<vector<Pole>> mapa;
+    void floodFill(int x, int y, char symbol);
+    bool sprawdzDostepnosc();
+    void dodajSciany(int ilosc);
+    bool czyObszarPusty(int x, int y, int szerokosc, int wysokosc);
+    void dodajPokoje(int ilosc);
+    void floodFillPrzejscie(int x, int y, int &maxKroki, int &maxX, int &maxY, int kroki);
+    void ustawSymbolNajdalszegoPola();
+    void generujNowaMape(Gracz &gracz);
     Goblin goblin;
     Szczur szczur;
     Zombi zombi;
     Ogr ogr;
+
     Zywiolak zywiolak;
 };
 

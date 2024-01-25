@@ -13,7 +13,7 @@ float Przeciwnik::obrazenia() {
 
 void Przeciwnik::wyswietlStatystyki(){
 
-    cout << "Statystyki goblina:" << endl;
+    cout << "Statystyki: "<< nazwa << endl;
     cout << "Zycie: " << zycie << endl;
     cout << "Atak: " << atak << endl;
     cout << "Obrona: " << obrona << endl;
@@ -52,7 +52,7 @@ int Przeciwnik::dostanObrazenia(float obrazenia) {
     float obrazenia_red;
     obrazenia_red = obrazenia * (obrazenia / (obrazenia + this->obrona));
     obrazenia = floor(obrazenia_red);
-    cout<<"Obrazenia: " << obrazenia_red << " " << obrazenia << " " << this->atak <<" " << this->obrona;
+
     if(obrazenia > 0 ) {
         this->zycie-=obrazenia;
 
@@ -72,7 +72,7 @@ char Przeciwnik::dostanRuch(Gracz &gracz) {
 
     odlegloscOdGracza = adx + ady;
 
-    if (odlegloscOdGracza <= 2) {
+    if (odlegloscOdGracza <= 5) {
 
         if(adx > ady) {
             if(dx > 0){
