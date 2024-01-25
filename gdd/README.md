@@ -24,17 +24,28 @@ Gra jest typowym roguelike'em z kilkoma nowymi elementami, które zazwyczaj nie 
 
 ## 1. Postacie i potwory 
 
-Jeśli chodzi o postacie, będzie istnieć tylko jedna główna, ale będzie ona miała 3 główne klasy, takie jak wojownik, mag i łotrzyk. Oczywiście, będą również różnego rodzaju potwory. Główną tematyką będzie spaczenie niebios, czyli istoty, takie jak spaczone anioły, będą odgrywały znaczącą rolę. Na pierwszych piętrach gry pojawią się również takie klasyczne potwory jak gobliny, wilkołaki, zombie, wampiry, demony, upiory, duchy, ogry, minotaurzy itp.
+Goblin:
 
-Jeśli chodzi o dostępne rasy, w grze będą dostępne następujące:
+Cechy: Mała, zwinna istota.
+Opis: Goblin jest szybki i zręczny, co sprawia, że trudno go unikać. Jego atak jest średnio silny, ale ma ograniczoną obronę. Przeciwnik dość wytrzymały.
 
-- Ludzie
-- Elfy
-- Krasnoludy
-- Orkowie
-- Gobliny
+Ogr:
+Cechy: Potężny i silny wojownik.
+Opis: Ogr to potężny przeciwnik o wysokim ataku, jednak jego obrona jest niska. Pomimo tego, ma dużo życia, co sprawia, że jest groźnym przeciwnikiem wymagającym skoncentrowanego ataku.
 
-Należy zaznaczyć, że w miarę rozwoju gry, mogą pojawić się dodatkowe główne klasy i ewentualnie podklasy, które urozmaicą rozgrywkę.
+Szczur:
+Cechy: Mały, ale zwinny.
+Opis: Szczur jest niewielkim przeciwnikiem, ale zręczność i szczęście sprawiają, że jest trudny do uniknięcia i zada czasem obrażenia krytyczne. Ma niższe życie, co rekompensuje wrogość.
+Zombi:
+
+Cechy: Powolny, ale silny.
+Opis: Zombi cechuje się dużym atakiem, ale niską zręcznością i szczęściem. Jego obrona jest minimalna, ale ma umiejętność utrzymania się przy życiu z powodu wysokiej ilości życia.
+
+Żywiołak Lodowy:
+Cechy: Potężna istota lodu.
+Opis: Żywiołak Lodowy to potężny przeciwnik o bardzo wysokim ataku i obronie. Jest jednak mniej zwinny niż inne istoty. Posiada dużo życia i jest jednym z najtrudniejszych przeciwników, wymagającym strategicznego podejścia.
+
+Każdy przeciwnik w grze charakteryzuje się unikalnym zestawem cech, co sprawia, że każda walka jest inna i wymaga od gracza dostosowania taktyki do specyfiki danego przeciwnika.
 
 ## 2. Historia
 
@@ -73,36 +84,42 @@ Statystyki jak i inne rzeczy z tym związane będą w przyszłości dalej rozwij
 
 ## 6. Walka
 ### Statystyki postaci:
-Health (Zdrowie): Określa ilość punktów życia postaci. Gdy zdrowie spadnie do 0, postać umiera.
 
-Strength (Siła): Wpływa na zadawane obrażenia podczas ataku fizycznego.
+Poziom Gracza:
+poziom: Określa aktualny poziom postaci. Zdobywanie doświadczenia powoduje awans na wyższe poziomy, co skutkuje zwiększeniem umiejętności gracza.
 
-Dexterity (Zręczność): Wpływa na szanse uniknięcia ataku przeciwnika.
+Stan Zdrowia:
+Zycie: Ilość punktów życia postaci. Zmniejsza się w wyniku otrzymywanych obrażeń. Postac przegrywa, gdy ilość życia spadnie do zera.
 
-Intelligence (Inteligencja): Może wpływać na zdolności magiczne postaci.
+Statystyki Ofensywne:
+atak: Mierzy siłę ataku postaci. Im wyższa ta wartość, tym większe obrażenia zadaje przeciwnikom w walce.
 
-Wisdom (Mądrość): Może wpływać na odporność psychiczną postaci (chociaż w obecnym kodzie jest ustawione na stałą wartość).
+Statystyki Defensywne:
+obrona: Wartość obrony postaci, która redukuje otrzymywane obrażenia od przeciwników.
 
-Mana: Określa ilość punktów many, które są potrzebne do korzystania z umiejętności magicznych (chociaż w obecnym kodzie jest ustawione na stałą wartość).
+Zręczność i Szczęście:
+zrecznosc: Wpływa na szansę uniku przed atakami przeciwników.
+szczescie: Wpływa na szansę zadania obrażeń krytycznych przeciwnikom.
 
-Proficiency (Biegłość): Wpływa na szanse zadania krytycznego podczas ataku.
-
-Armor (Pancerz): Określa zdolność postaci do redukcji obrażeń od ataków fizycznych. Im wyższa wartość pancerza, tym mniejsze obrażenia zadawane przez przeciwników.
-
+Doświadczenie:
+doswiadczenie: Ilość zdobytego doświadczenia. Po osiągnięciu określonego poziomu doświadczenia, gracz awansuje na wyższy poziom, co zwiększa jego umiejętności.
 
 
 ### Walka:
-1. Atak Gracza:
-Gracz posiada statystyki, takie jak siła ataku, zręczność, szczęście, które wpływają na skuteczność jego ataków.
-W przypadku ataku, losowane są obrażenia w oparciu o statystyki gracza, a następnie przekazywane przeciwnikowi.
-2. Uniki:
-Przeciwnicy posiadają zdolność do unikania ataków, zależną od ich zręczności.
+Atak Gracza:
+Gracz, przeciwnicy posiadają statystyki, takie jak siła ataku, zręczność, szczęście, które wpływają na skuteczność ich ataków.
+W przypadku ataku, losowane są obrażenia w oparciu o statystyki gracza badź przeciwnika, a następnie przekazywane przeciwnikowi lub graczowi.
+
+Uniki:
+Przeciwnicy jak i bohaterowie posiadają zdolność do unikania ataków, zależną od ich zręczności.
 Mechanizm uników oparty jest na losowaniu liczby w zakresie od 0 do 99, a wynik decyduje o powodzeniu uniku.
-3. Ciosy Krytyczne:
+
+Ciosy Krytyczne:
 Zarówno gracz, jak i przeciwnicy mają szansę zadania ciosu krytycznego.
 Szansa na cios krytyczny zależy od statystyki szczęścia.
 W przypadku sukcesu, obrażenia są zwiększone, co może wpłynąć na wynik walki.
-4. Zdrowie i Śmierć:
+
+Zdrowie i Śmierć:
 Każdy uczestnik walki (gracz i przeciwnik) ma określoną pulę zdrowia.
 Obrażenia zadane podczas ataków zmniejszają tę pulę.
 Jeśli zdrowie spadnie do zera, postać umiera.
@@ -110,36 +127,22 @@ Po śmierci przeciwnika, gracz otrzymuje punkty doświadczenia.
 
 ## 7. Przedmioty i wzmocnienia
 
-Dostosowane bronie: Każda klasa i rasa będzie miała dostęp do różnych broni, co pozwoli na unikatowe style walki. Na przykład, elfy mogą korzystać z łuków i mieczy, podczas gdy orkowie będą specjalizować się w broniach białych i możliwe że będą posiadać  specjalne umiejętności wzmocnienia bądź dodatkowe umiejętności pasywne.
+Klasy przedmiotów:
 
-Unikalne umiejętności i wzmocnienia: Rasy i klasy będą posiadać unikalne umiejętności pasywne(na razie chciałbym się skupić na pasywnych) lub aktywne, które wpłyną na ich zdolności w walce i poza nią. To dodatkowo urozmaici strategię i styl rozgrywki dla różnych postaci.
+HELM: Ochrona przed obrażeniami.
+PANCERZ: Zapewnia dodatkową ochronę ciała, redukując obrażenia od ataków przeciwników.
+SPODNIE: Zwiększają ruchliwość postaci i chronią przed obrażeniami.
+MIECZ: Narzędzie do ataku, wpływające na siłę rażenia w walce.
+PIERŚCIEN: Bonusy do statystyk takich jak zręczność, szczęście.
+PAS: Zwiększa zręczność postaci i wpływa na szanse unikania ataków.
+Statystyki przedmiotów:
 
-Ekwipunek:
+Gracze mogą zdobywać przedmioty podczas eksploracji mapy.
 
-Ma kilka elementow:
-Glowa (hełmy, przepaski itd.) - daja dodatkowy pancerz, mniejsza ilość statysyk
+Balansowanie i strategia:
 
-Barki (naramieniki) - daja dodatkowy pancerz, mniejsza ilość statysyk
-
-Klatka piersiowa (pancerz, szaty itd.) daja dodatkowy pancerz, średnia ilość statysyk
-
-lewa ręka, prawa ręka (lewa to broń, prawa to kołczan, tarcze itd.) - Dodatkowe bazowe punkty obrażen jeżeli chodzi o broń, natomiast prawa ręka czyli przedmioty dodatkowe takie jak tarcza, kołczan  itd. dają bonusy + statysyki w przypadku tarczy szansze na całkowite zablokowanie obrażeń, kołczaam więcej strzał.
-
-Pierścionki (tylko 2) - dają tylko statystyki
-
-Pasek - daje tylko statysyki głównie do siły
-
-Spodnie - pancerz, mniejsza ilość statysyk
-
-Buty - pancerz, potencjalne zwiększenie szybkośći (nie ma jeszcze jej w grze).
-
-Plecak:
-
-7 miejsc na przedmioty nie ma znaczenia jakiego typu mogą to być strzały itd.
-
-Różnorodność broni: Spora ilość broni dostosowanych do klas i ras, aby zapewnić graczom szeroki wybór. Każda klasa i rasa będzie miała dostęp do specjalnych broni, co pozwoli na eksperymentowanie z różnymi zestawami i stylami walki.
-
-Wszystkie te elementy dostosowane do klas i ras wprowadzą unikalne aspekty rozgrywki, zachęcając graczy do eksperymentowania z różnymi postaciami i strategiami w walce z przeciwnikami oraz eksploracji świata gry.
+Gracze muszą równoważyć swoje statystyki, decydując, czy chcą być bardziej ofensywni, defensywni czy zdolni do unikania ataków.
+Zmiana zestawu przedmiotów może dostosować postać do różnych sytuacji, co wymaga elastycznej strategii.
 
 ## 8. Postęp i Wyzwania
 
@@ -164,10 +167,6 @@ Przegrywanie w grze następuje w momencie, gdy życie postaci spadnie do zera, c
 Styl artystyczny gry będzie koncentrował się na motywie spaczenia, co oznacza, że elementy takie jak kolor czerwony będą widoczne na różnych elementach, włączając w to potwory, ściany i inny otaczający świat. Stopniowo, w miarę jak gracze będą eksplorować wyższe piętra, efekty spaczenia staną się bardziej wyraźne i intensywne, co wpłynie na atmosferę i wyzwania w grze.
 
 Ten styl artystyczny pozwoli na stworzenie unikalnej i niepowtarzalnej atmosfery, co będzie pasować do tematyki gry związanej z walką z przeklętymi niebem i spaczeniem boskich istot. (Oczywiście to chciałbym dodać na końcu na początku będzie to grafika ascii)
-
-## 11. Opis techniczny
-
-Na razie brak.
 
 ## 12. Lokalizacje
 
