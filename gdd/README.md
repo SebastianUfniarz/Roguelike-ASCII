@@ -92,36 +92,21 @@ Armor (Pancerz): Określa zdolność postaci do redukcji obrażeń od ataków fi
 
 
 ### Walka:
-Atak:
-
-Postać atakująca losuje obrażenia w zależności od siły. Im wyższa siła, tym większe obrażenia.
-
-Unikanie Ataku:
-
-Postać atakowana ma szansę na uniknięcie ataku zależną od jej zręczności. Im wyższa zręczność, tym większa szansa na uniknięcie.
-
-Krytyczny Cios:
-
-Szansa na zadanie krytycznego ciosu zależy od biegłości postaci. Im wyższa biegłość, tym większa szansa na krytyczny cios. Krytyczny cios podwaja zadane obrażenia.
-
-Redukcja Obrażeń z Użyciem Pancerza:
-
-W chwili ataku, wartość pancerza przeciwnika jest uwzględniana w procesie redukcji obrażeń.
-Im wyższa wartość pancerza, tym większa zdolność postaci do zmniejszenia otrzymywanych obrażeń.
-
-Procentowa Redukcja:
-
-Redukcja obrażeń związana z pancerzem jest wyrażana procentowo.
-Wysoka wartość pancerza oznacza większą procentową redukcję obrażeń, co przekłada się na mniejsze otrzymane obrażenia od ataków.
-
-Ogólne Zasady:
-
-Zdrowie postaci atakowanej jest zmniejszane o zadane obrażenia.
-Gdy zdrowie spadnie do 0, postać atakowana umiera.
-Istnieje szansa, że postać atakowana uniknie ataku.
-Istnieje szansa, że postać atakująca zadaje krytyczne obrażenia.
-
-Ogólnie rzecz biorąc, walka w grze opiera się na losowości (np. losowanie obrażeń, szansa na uniknięcie ataku, szansa na krytyczny cios), a statystyki postaci wpływają na te szanse oraz na ilość zadawanych obrażeń. Gracz będzie musiał strategicznie zarządzać postaciami, wykorzystując ich unikalne statystyki do skutecznego przetrwania i pokonywania przeciwników.
+1. Atak Gracza:
+Gracz posiada statystyki, takie jak siła ataku, zręczność, szczęście, które wpływają na skuteczność jego ataków.
+W przypadku ataku, losowane są obrażenia w oparciu o statystyki gracza, a następnie przekazywane przeciwnikowi.
+2. Uniki:
+Przeciwnicy posiadają zdolność do unikania ataków, zależną od ich zręczności.
+Mechanizm uników oparty jest na losowaniu liczby w zakresie od 0 do 99, a wynik decyduje o powodzeniu uniku.
+3. Ciosy Krytyczne:
+Zarówno gracz, jak i przeciwnicy mają szansę zadania ciosu krytycznego.
+Szansa na cios krytyczny zależy od statystyki szczęścia.
+W przypadku sukcesu, obrażenia są zwiększone, co może wpłynąć na wynik walki.
+4. Zdrowie i Śmierć:
+Każdy uczestnik walki (gracz i przeciwnik) ma określoną pulę zdrowia.
+Obrażenia zadane podczas ataków zmniejszają tę pulę.
+Jeśli zdrowie spadnie do zera, postać umiera.
+Po śmierci przeciwnika, gracz otrzymuje punkty doświadczenia.
 
 ## 7. Przedmioty i wzmocnienia
 
