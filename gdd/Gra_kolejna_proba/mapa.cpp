@@ -1,4 +1,5 @@
 ﻿#include "mapa.h"
+#include "boss.h"
 #include "podloga.h"
 #include "przejscie.h"
 #include "sciana.h"
@@ -9,7 +10,7 @@
 #include "plecak.h"
 #include "przeciwnik.h"
 #include <math.h>
-#include <thread>
+
 void Mapa::czyscMape() {
 #ifdef _WIN32
     system("cls");
@@ -41,6 +42,8 @@ void Mapa::stworzMape() {
     dodajPokoje(1);
 
     dodajPrzeciwnikaLosowo(Szczur(),1);
+
+
 
 }
 
@@ -162,6 +165,18 @@ void Mapa::dodajGracza(int x, int y, Gracz &gracz) {
         gracz.inicjalizajca(1, 50, 10, 5, 5, 10, 50);
 }
 void Mapa::dodajPrzeciwnikaLosowo(Przeciwnik przeciwnik, int ilosc) {
+        if(przeciwnik.nazwa == "Boss"){
+            int x = szerokoscMapy - 5;
+            int y = wysokoscMapy - 5;
+            przeciwnik.x = x;
+            przeciwnik.y = y;
+            mapa[y][x] = przeciwnik;
+            przeciwnik.zycieMax=przeciwnik.zycie;
+            przeciwnicy.push_back(przeciwnik);
+        }
+        else{
+
+
     for (int k = 0; k < ilosc; ++k) {
         int x = rand() % (szerokoscMapy - 2) + 1;
         int y = rand() % (wysokoscMapy - 2) + 1;
@@ -177,9 +192,10 @@ void Mapa::dodajPrzeciwnikaLosowo(Przeciwnik przeciwnik, int ilosc) {
         } else {
             --k;
         }
+        }
     }
 }
-void Mapa::dodajPrzedmiot(string nazwa, float atak,float obrona,float szczescie, float zrecznosc, przedmiotTyp typ) {
+void Mapa::dodajPrzedmiot(string nazwa, float atak,float obrona,float szczescie, float zrecznosc, przedmiotTyp typ, int szansa) {
     int x, y;
 
        do {
@@ -196,6 +212,7 @@ void Mapa::dodajPrzedmiot(string nazwa, float atak,float obrona,float szczescie,
     nowyPrzedmiot.szczescie = szczescie;
     nowyPrzedmiot.zrecznosc = zrecznosc;
     nowyPrzedmiot.obrona = obrona;
+    nowyPrzedmiot.szansa = szansa;
     przedmioty.push_back(nowyPrzedmiot);
     mapa[y][x] = nowyPrzedmiot;
 }
@@ -234,7 +251,9 @@ void Mapa::dodajPrzeciwnika(int x, int y, char symbol, string nazwa, int atak, i
 }
 
 void Mapa::generujNowaMape(Mapa &mapa) {
-    // Pobierz aktualne wymiary mapy
+    mapa.poziom_mapy=mapa.poziom_mapy + 1;
+    cout<<"Przeszedles na nastepny poziom"<< poziom_mapy<<endl;
+
     int obecnaSzerokosc = mapa.szerokoscMapy;
     int obecnaWysokosc = mapa.wysokoscMapy;
 
@@ -257,24 +276,22 @@ void Mapa::generujNowaMape(Mapa &mapa) {
 
 
 
-    // Przykładowa implementacja: dodaj odpowiednią ilość nowych kolumn i wierszy
-    szerokoscMapy += 10;
-    wysokoscMapy += 20;
 
-    // Rozszerz wektor do nowych wymiarów
+    szerokoscMapy += 10;
+    wysokoscMapy += 10;
+
+
     mapa.mapa.resize(wysokoscMapy, vector<Pole>(szerokoscMapy, Podloga()));
 
-    // Dodaj ściany na lewym, prawym i dolnym boku
     for (int i = 0; i < wysokoscMapy; ++i) {
-        mapa.mapa[i][0] = Sciana();                 // Dodaj ścianę po lewej stronie
-
+        mapa.mapa[i][0] = Sciana();
     }
-    for (int i = wysokoscMapy-20; i < wysokoscMapy; ++i) {
+    for (int i = wysokoscMapy-10; i < wysokoscMapy; ++i) {
         mapa.mapa[i][szerokoscMapy - 1] = Sciana();
 
     }
     for (int j = 0; j < szerokoscMapy; ++j) {
-        mapa.mapa[wysokoscMapy - 1][j] = Sciana();  // Dodaj ścianę na dole
+        mapa.mapa[wysokoscMapy - 1][j] = Sciana();
     }
 
     // Dodaj ściany dwa poziomy poniżej symbolu '^'
@@ -284,21 +301,56 @@ void Mapa::generujNowaMape(Mapa &mapa) {
         }
     }
 
-    // Usuń dwie ściany bezpośrednio pod graczem
+    int szansa = 50;
+    int randomValue = rand() % 100;
+
+    if(randomValue < szansa){
+        mapa.dodajPokoje(4);
+    }
+    else {
+        mapa.dodajSciany(50);
+    }
+
+    if(poziom_mapy < 2){
+        mapa.ustawSymbolNajdalszegoPola();
+    }
+    if(poziom_mapy == 2){
+        mapa.dodajPrzeciwnikaLosowo(Boss(),1);
+    }
+
     if (xPrzejscia != -1 && yPrzejscia != -1) {
-        int removeWallX = xPrzejscia;  // Remove one wall directly below the player character
+        int removeWallX = xPrzejscia;
+        int removeWallY1_1 = yPrzejscia -1;
+        int removeWallY2_1 = yPrzejscia-2;
+        int removeWallY3_1 = yPrzejscia-3;
+        int removeWallY4_1 = yPrzejscia-4;
+        int removeWallY5_1 = yPrzejscia-5;
+        int removeWallY6_1 = yPrzejscia-6;
         int removeWallY1 = yPrzejscia + 1;
         int removeWallY2 = yPrzejscia + 2;
+        int removeWallY3 = yPrzejscia + 3;
+        int removeWallY4 = yPrzejscia + 4;
+        int removeWallY5 = yPrzejscia + 5;
+        int removeWallY6 = yPrzejscia + 6;
 
         if (removeWallY1 < wysokoscMapy && removeWallY2 < wysokoscMapy && removeWallX >= 0 && removeWallX < szerokoscMapy) {
-            mapa.mapa[removeWallY1][removeWallX] = Podloga();  // Usuń jedną ścianę bezpośrednio pod graczem
-            mapa.mapa[removeWallY2][removeWallX] = Podloga();  // Usuń drugą ścianę bezpośrednio pod graczem
+            mapa.mapa[removeWallY1][removeWallX] = Podloga();
+            mapa.mapa[removeWallY2][removeWallX] = Podloga();
+            mapa.mapa[removeWallY3][removeWallX] = Podloga();
+            mapa.mapa[removeWallY4][removeWallX] = Podloga();
+            mapa.mapa[removeWallY5][removeWallX] = Podloga();
+            mapa.mapa[removeWallY6][removeWallX] = Podloga();
+            mapa.mapa[removeWallY1_1][removeWallX] = Podloga();
+            mapa.mapa[removeWallY2_1][removeWallX] = Podloga();
+            mapa.mapa[removeWallY3_1][removeWallX] = Podloga();
+            mapa.mapa[removeWallY4_1][removeWallX] = Podloga();
+            mapa.mapa[removeWallY5_1][removeWallX] = Podloga();
+            mapa.mapa[removeWallY6_1][removeWallX] = Podloga();
         }
     }
-    mapa.dodajLas(60);
-    mapa.ustawSymbolNajdalszegoPola();
     mapa.dodajPrzeciwnikaLosowo(Goblin(),2);
 }
+
 
 void Mapa::przesunGracza(char kierunek, Mapa &mapa, Gracz &gracz) {
     int nowyX = gracz.x;
@@ -457,14 +509,14 @@ void Mapa::przetworzRuchPrzeciwnika(Gracz &gracz, int przeciwnikIndex, int miejs
         return;
     }
     else if (poleRuchu.symbol == '.') {
-        // Clear the previous position of the enemy on the map
+
         setPole(przeciwnikX, przeciwnikY, '.');
 
-        // Update the position of the enemy
+
         przeciwnicy[przeciwnikIndex].x = miejsceX;
         przeciwnicy[przeciwnikIndex].y = miejsceY;
 
-        // Set the symbol at the new position
+
         setPole(miejsceX, miejsceY, przeciwnicy[przeciwnikIndex].symbol);
 
     }

@@ -104,7 +104,7 @@ char Przeciwnik::dostanRuch(Gracz &gracz) {
         }
     }
     if (nazwa == "Szczur" && szansaJedzeniaRoll(generator) <= 0.1 && !gracz.wTrakcieWalki) {
-        cout<<"Szczur zjadl zwloki"<<endl;
+        cout <<"Szczur zjadl zwloki"<<endl;
             zycie+=1;
             zrecznosc += 1;
             szczescie += 1;

@@ -4,6 +4,7 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
+        boss.cpp \
         goblin.cpp \
         gracz.cpp \
         main.cpp \
@@ -22,6 +23,7 @@ SOURCES += \
         zywiolak.cpp
 
 HEADERS += \
+    boss.h \
     goblin.h \
     gracz.h \
     mapa.h \

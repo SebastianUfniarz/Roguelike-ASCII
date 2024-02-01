@@ -19,6 +19,7 @@ public:
     string nazwa;
     przedmiotTyp typ;
     float atak, obrona, szczescie, zrecznosc;
+    int szansa;
 };
 
 

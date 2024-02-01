@@ -1,0 +1,17 @@
+release/boss.o
+release/goblin.o
+release/gracz.o
+release/main.o
+release/mapa.o
+release/ogr.o
+release/plecak.o
+release/podloga.o
+release/pole.o
+release/przeciwnik.o
+release/przedmiot.o
+release/przejscie.o
+release/sciana.o
+release/systemgry.o
+release/szczur.o
+release/zombi.o
+release/zywiolak.o

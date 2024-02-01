@@ -22,7 +22,7 @@ public:
     void stworzMape();
     void wyswietl();
     void dodajGracza(int x, int y, Gracz &gracz);
-    void dodajPrzedmiot(string nazwa, float atak,float obrona,float szczescie, float zrecznosc, przedmiotTyp typ);
+    void dodajPrzedmiot(string nazwa, float atak,float obrona,float szczescie, float zrecznosc, przedmiotTyp typ, int szansa);
     void dodajPrzeciwnika(int x, int y, char pole, string nazwa, int atak, int obrona, int zycie, float zrecznosc, float szczescie, int wartoscDoswiadczenia);
     void dodajPrzeciwnika();
     void przesunGracza(char kierunek, Mapa &mapa, Gracz &gracz);
@@ -52,6 +52,8 @@ public:
     void floodFillPrzejscie(int x, int y, int &maxKroki, int &maxX, int &maxY, int kroki);
     void ustawSymbolNajdalszegoPola();
     void generujNowaMape(Mapa &mapa);
+
+    int poziom_mapy=0;
     Goblin goblin;
     Szczur szczur;
     Zombi zombi;
