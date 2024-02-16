@@ -8,16 +8,12 @@ Gra jest typowym roguelike'em z kilkoma nowymi elementami, które zazwyczaj nie 
 
 ## Legenda
 1. Postacie
-1. Historia
 1. Rozgrywka
 1. Cel
-1. Mechanika gry
 1. Walka
 1. Przedmioty i wzmocnienia
 1. Postęp i Wyzwania
 1. Przegrywanie
-1. Styl artystyczny
-1. Opis techniczny
 1. Lokalizacje
 
 
@@ -56,42 +52,19 @@ Opis: Żywiołak Lodowy to potężny przeciwnik o bardzo wysokim ataku i obronie
 
 Każdy przeciwnik w grze charakteryzuje się unikalnym zestawem cech, co sprawia, że każda walka jest inna i wymaga od gracza dostosowania taktyki do specyfiki danego przeciwnika.
 
-## 2. Historia
-
-Historia będzie przedstawiana w postaci notatek, które będą leżeć w losowych pokojach. Jeśli chodzi o główny zarys, wygląda on tak: Istnieje bóg, który został spaczony przez jakąś mroczną moc. Zamiast pozwalać duszom spokojnie trafić do nieba lub piekła, zaczął je niszczyć, co wywołało ogromny chaos wśród wszystkich ludów (jak doszło do tego, postaram się umieścić w grze). Teraz będziemy świadkami różnych etapów tego spaczenia, gdzie największe zmiany zachodzą na poziomie samego boga, a im niżej, tym mniejsze są skutki spaczania.
-
-Oczywiście, w zwykłym świecie, zamieszkałym przez ludzi, elfów, orków, krasnoludów i goblinów, zareagowano na te wydarzenia. Przestali oni toczyć ze sobą wojny, aby móc się skupić na większym zagrożeniu, a więc wysłali swoich najsilniejszych wojowników do nieba, korzystając z potężnych artefaktów, które wspólnie stworzyli. Niestety, tylko jeden wojownik przeżył tę ekspedycję, co prowadzi nas do wyboru postaci i klasy, w jaką się wcielimy.
-
-## 3. Rozgrywka
-
-Rozgrywka w tej grze będzie typowa dla gier typu Roguelike, co oznacza, że będzie oparta na turowości, różnych klasach postaci oraz zróżnicowanym ekwipunku. Wartościowy ekwipunek jest kluczowy dla sukcesu w przetrwaniu i pokonaniu zagrożeń, które czyhają na bohatera. Gracz będzie się poruszać po losowo wygenerowanych poziomach.
-
-Klasy postaci odgrywają istotną rolę w kształtowaniu strategii i stylu gry. Każda klasa będzie posiadać zwiększone statystyki charakterystyczne dla danej rasy i klasy, co pozwoli na różne podejścia do walki. Niektóre bronie lub rodzaje ekwipunku mogą być zablokowane bądź średnio użyteczne dla określonych ras i klas, aby odzwierciedlić charakterystykę danej postaci. Na przykład, nie wyobrażamy sobie elfa, który biega z dwuręcznym toporem w sam środek walki, więc tego typu bronie będą niedostępne dla tej rasy lub nie będą efektywne, uwzględniając statystyki i umiejętności danej klasy i rasy, co sprawi, że walka taką bronią będzie utrudniona.
-
-Ta kompleksowa mechanika gry zachęci graczy do eksperymentowania z różnymi kombinacjami ras, klas i ekwipunku, aby znaleźć optymalny sposób na przetrwanie w nieustannie zmieniającym się i niebezpiecznym świecie gry.
-
-## 4. Cel
-
-Celem głównym gry jest pokonanie spaczonego Boga i odnalezienie artefaktu, który umożliwi jego odrodzenie. Ten artefakt jest kluczowy do przywrócenia równowagi w niebie i przywrócenia normalności w świecie gry. Kiedy gracze odnajdą artefakt, będą musieli wrócić z nim do Boga, pokonująć dodatkowych przeciwników.
 
 
-## 5. Mechanika gry
+## 2. Rozgrywka
 
-W grze będzie istnieć kilka kluczowych aspektów mechaniki:
+Rozgrywka w tej grze jest typowa dla gier typu Roguelike, co oznacza, że jest oparta na turowości, zróżnicowanym ekwipunku. Wartościowy ekwipunek jest kluczowy dla sukcesu w przetrwaniu i pokonaniu zagrożeń, które czyhają na bohatera. Gracz porusza się po losowo wygenerowanych poziomach.
 
-Obrażenia i broń: Każda broń będzie miała swój przedział obrażeń, a rodzaj broni będzie wpływał na umiejętności postaci. Na przykład, broń biała może być zależna od siły, podczas gdy magia będzie umożliwiała uniknięcie pancerza przeciwnika, a zręczność wpływać na moc łuków, sztyletów, mieczy i szanse na uniknięcie tarfienia.
 
-Szansa trafienia: Każdy atak będzie miał określoną szansę na trafienie, zależną od statystyki szczęścia postaci. Im większa ta statystyka, tym łatwiej będzie trafić. Wyższe szczęście może także wpływać na szanse na trafienie krytyczne, które zadadzą znacznie większe obrażenia.
+## 3. Cel
 
-Pancerz: Przeciwnicy mogą posiadać pancerz, który osłabia obrażenia od ataków. Jednak magia będzie miała zdolność do ignorowania pancerza przeciwnika, co stanowi dodatkową strategię w walce.
+Celem głównym gry jest pokonanie spaczonego Boga. 
 
-Statystyki postaci: Statystyki postaci, takie jak siła, zręczność i inteligencja, będą miały wpływ na umiejętności i obrażenia postaci. Siła wpłynie na moc ataku postaci dla broni białych, zręczność będzie istotna dla łotrzyków korzystających z łuków i szytyletów, a inteligencja będzie kluczowym czynnikiem dla magów.
 
-Życie postaci: Każda postać będzie posiadała ograniczoną ilość punktów życia, co oznacza, że gracze będą musieli dbać o swoje zdrowie podczas walki. Może to wymagać korzystania z mikstur, umiejętności leczniczych lub unikania potężnych ataków.
-
-Statystyki jak i inne rzeczy z tym związane będą w przyszłości dalej rozwijane aby gracz miał więcej możliwości wyboru.
-
-## 6. Walka
+## 4. Walka
 ### Statystyki postaci:
 
 #### Poziom Gracza:
@@ -134,19 +107,25 @@ Obrażenia zadane podczas ataków zmniejszają tę pulę.
 Jeśli zdrowie spadnie do zera, postać umiera.
 Po śmierci przeciwnika, gracz otrzymuje punkty doświadczenia.
 
-## 7. Przedmioty i wzmocnienia
+## 5. Przedmioty i wzmocnienia
 
 ### Klasy przedmiotów:
 
 HELM: Ochrona przed obrażeniami.
 
-PANCERZ: Zapewnia dodatkową ochronę ciała, redukując obrażenia od ataków przeciwników.
+PANCERZ, REKAWICE: Zapewnia dodatkową ochronę ciała, redukując obrażenia od ataków przeciwników.
 
 SPODNIE: Zwiększają ruchliwość postaci i chronią przed obrażeniami.
 
-MIECZ: Narzędzie do ataku, wpływające na siłę rażenia w walce.
+MIECZ: Narzędzie do ataku, wpływające na atak rażenia w walce i lekko na zręczność.
+
+TOPOR: Narzędzie do ataku, wpływające na bardzo na atak rażenia w walce.
 
 PIERŚCIEN: Bonusy do statystyk takich jak zręczność, szczęście.
+
+BUTY: Bonus do zręczności, obrony.
+
+AMULET: Różne bonusy.
 
 PAS: Zwiększa zręczność postaci i wpływa na szanse unikania ataków.
 Statystyki przedmiotów:
@@ -158,32 +137,21 @@ Gracze mogą zdobywać przedmioty podczas eksploracji mapy.
 Gracze muszą równoważyć swoje statystyki, decydując, czy chcą być bardziej ofensywni, defensywni czy zdolni do unikania ataków.
 Zmiana zestawu przedmiotów może dostosować postać do różnych sytuacji, co wymaga elastycznej strategii.
 
-## 8. Postęp i Wyzwania
+## 6. Postęp i Wyzwania
 
-Rozwijanie postaci będzie klasyczne, polegające na zdobywaniu doświadczenia za każdego pokonanego przeciwnika, co umożliwi zdobywanie poziomów postaci oraz związanych z nimi statystyk.
+Rozwijanie postaci jest klasyczne, polegające na zdobywaniu doświadczenia za każdego pokonanego przeciwnika, co umożliwia zdobywanie poziomów postaci oraz związanych z nimi statystyk.
 
-Co piąty (możliwe że będzie inny) poziom będzie nagradzany wyborem wzmocnienia, takiej umiejętności pasywnej, co pozwoli na dostosowanie postaci do własnych preferencji. Na przykład, po osiągnięciu piątego poziomu gracz może wybrać umiejętność pasywną, która przywraca część zdrowia za każdego zabitego przeciwnika lub zwiększa zdobywanie statystyk życia, siły itd.
+Jednym z kluczowych wyzwań będzie zarządzanie zasobami, zwłaszcza punktami życia, bo mikstury życia nie są łatwo dostępne. 
 
-Jednym z kluczowych wyzwań będzie zarządzanie zasobami, zwłaszcza punktami życia, ponieważ dostęp do sklepików będzie ograniczony, a mikstury życia nie będą łatwo dostępne. Gracze będą musieli podejmować strategiczne decyzje dotyczące walki i eksploracji, aby przetrwać w niebezpiecznym świecie gry.
+Każde piętro będzie stanowi coraz większe wyzwanie, z przeciwnikami posiadającymi większą ilość zdrowia, wyższą siłę ataku.
 
-Każde piętro będzie stanowiło coraz większe wyzwanie, z przeciwnikami posiadającymi większą ilość zdrowia, wyższą siłę ataku i ewentualnie specjalne umiejętności (to raczej zostanie dodane później), takie jak trucizna, podpalenie i inne.
+## 7. Przegrywanie
 
-Takie skalowanie trudności pomoże utrzymać poziom wyzwań i ekscytacji podczas eksploracji gry, a także sprawi, że osiągnięcie coraz wyższych poziomów stanie się prawdziwym osiągnięciem dla graczy.
+Przegrywanie w grze następuje w momencie, gdy życie postaci spadnie do zera, co skutkuje rozpoczęciem gry od samego początku. 
 
-Dzięki takim elementom, gracze będą zachęcani do planowania rozwoju swojej postaci i dokonywania istotnych wyborów podczas rozgrywki, co wprowadzi dodatkowy poziom strategii i wyzwań w grze.
 
-## 9. Przegrywanie
+## 8. Lokalizacje
 
-Przegrywanie w grze następuje w momencie, gdy życie postaci spadnie do zera, co skutkuje rozpoczęciem gry od samego początku. W standardowej rozgrywce nie przewiduje się drugich szans, jednak istnieje możliwość wprowadzenia specjalnego wzmocnienia z około 5% szansą, które może przywrócić postać do życia z niewielką ilością punktów życia, na przykład 50 (raczej będzie to dodane później).
-
-## 10. Styl artystyczny
-
-Styl artystyczny gry będzie koncentrował się na motywie spaczenia, co oznacza, że elementy takie jak kolor czerwony będą widoczne na różnych elementach, włączając w to potwory, ściany i inny otaczający świat. Stopniowo, w miarę jak gracze będą eksplorować wyższe piętra, efekty spaczenia staną się bardziej wyraźne i intensywne, co wpłynie na atmosferę i wyzwania w grze.
-
-Ten styl artystyczny pozwoli na stworzenie unikalnej i niepowtarzalnej atmosfery, co będzie pasować do tematyki gry związanej z walką z przeklętymi niebem i spaczeniem boskich istot. (Oczywiście to chciałbym dodać na końcu na początku będzie to grafika ascii)
-
-## 12. Lokalizacje
-
-Lokalizacja będzie jedna, tylko będą się zmieniać piętra. Możliwe dodanie w późniejszym etapie dodatkowych przeszkód na piętrach, tak aby urozmaicić rozgrywkę i stworzyć większe wyzwania taktyczne, na przykład całkowite zablokowanie jakiejś ścieżki lub dodanie pułapek.
+Lokalizacja jest jedna czyli wieża, jedynie zmieniają się w niej poziomy. 
 
 
